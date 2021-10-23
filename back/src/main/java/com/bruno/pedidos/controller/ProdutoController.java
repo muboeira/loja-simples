@@ -11,37 +11,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import com.bruno.pedidos.model.Cliente;
-import com.bruno.pedidos.repository.ClienteRepository;
+import com.bruno.pedidos.model.Produto;
+import com.bruno.pedidos.repository.ProdutoRepository;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/produto")
+public class ProdutoController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ProdutoRepository produtoRepository;
     
     @GetMapping
-    public List<Cliente> listar() {
-        return clienteRepository.findAll();
+    public List<Produto> listar() {
+        return produtoRepository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente cadastrar(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente); 
+    public Produto cadastrar(@RequestBody Produto produto) {
+        return produtoRepository.save(produto); 
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente atualizar(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente); 
+    public Produto atualizar(@RequestBody Produto produto) {
+        return produtoRepository.save(produto); 
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Cliente> remover(@RequestBody Cliente cliente) {
-        clienteRepository.deleteById(cliente.getId());
-        return clienteRepository.findAll(); 
+    public List<Produto> remover(@RequestBody Produto produto) {
+        produtoRepository.deleteById(produto.getId());
+        return produtoRepository.findAll(); 
     }
 }
