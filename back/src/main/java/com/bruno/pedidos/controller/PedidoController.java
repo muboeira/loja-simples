@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+
+import com.bruno.pedidos.model.ItemPedido;
 import com.bruno.pedidos.model.Pedido;
 import com.bruno.pedidos.repository.PedidoRepository;
+import com.bruno.pedidos.repository.ItemPedidoRepository;
 
 @RestController
 @RequestMapping("/pedido")
@@ -20,7 +23,8 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
-    
+    private ItemPedidoRepository itemPedidoRepository;
+
     @GetMapping
     public List<Pedido> listar() {
         return pedidoRepository.findAll();
