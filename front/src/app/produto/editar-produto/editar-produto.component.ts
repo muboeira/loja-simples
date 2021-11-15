@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Produto } from '../../shared/models/produto.model';
+import { ProdutoService } from '../services/produto.service';
 
 @Component({
   selector: 'app-editar-produto',
@@ -7,9 +11,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarProdutoComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('formProduto') formProduto!: NgForm;
+
+  produto!: Produto;
+
+  constructor(
+    private produtoService: ProdutoService,
+    private routerParams: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.buscarProduto();
+  }
+
+  buscarProduto(): void {
+    const id = +this.routerParams.snapshot.params['produtoId'];
+
+    this.produtoService.buscarPorId(id).subscribe({
+      next: (data: Produto | undefined) => {
+        if(data == undefined) {
+          this.router.navigate(['/produtos']);
+        }else {
+          this.produto = data;
+        }
+      }
+    });
+  }
+
+  atualizar(): void {
+    if (this.formProduto.form.valid && this.produto) {
+      this.produtoService.atualizar(this.produto).subscribe({
+        next: (data: Produto) => {
+          this.router.navigate(['/produtos']);
+        }
+      });
+    }
   }
 
 }

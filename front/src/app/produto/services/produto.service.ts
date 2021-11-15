@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProdutoService {
   constructor(private httpClient: HttpClient) {}
 
-  BASE_URL = "http://localhost:8080/produto";
+  BASE_URL = "http://localhost:8080/produto/";
   httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   listarTodos(): Observable<Produto[]> {
@@ -27,12 +27,17 @@ export class ProdutoService {
   }
   /*remover(id: number): Observable<Usuario> {
     return this.httpClient.delete<Usuario>(this.BASE_URL + id, this.httpOptions);
+  }*/
+
+  buscarPorId(id: number): Observable<Produto> {
+    return this.httpClient.get<Produto>(this.BASE_URL + id,this.httpOptions);
   }
-  alterar(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.put<Usuario>(
-      this.BASE_URL + usuario.id,
-      JSON.stringify(usuario),
+  
+  atualizar(produto: Produto): Observable<Produto> {
+    return this.httpClient.put<Produto>(
+      this.BASE_URL,
+      JSON.stringify(produto),
       this.httpOptions
     );
-  }*/
+  }
 }
