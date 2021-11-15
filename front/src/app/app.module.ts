@@ -6,17 +6,19 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import { ProdutoModule } from './produto/produto.module';
+import { PedidoModule } from './pedido/pedido.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProdutoModule,
+    PedidoModule,
     HttpClientModule
   ],
   providers: [],
