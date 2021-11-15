@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Produto } from '../../shared/models/produto.model';
-import{ HttpClient, HttpHeaders} from'@angular/common/http';
+import { HttpClient, HttpHeaders} from'@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProdutoService {
   constructor(private httpClient: HttpClient) {}
 
-  BASE_URL = "http://localhost:8080/produto/";
+  BASE_URL = "http://localhost:8080/produto";
   httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   listarTodos(): Observable<Produto[]> {
@@ -18,6 +18,7 @@ export class ProdutoService {
   }
 
   inserir(produto: Produto): Observable<Produto> {
+    console.log(JSON.stringify(produto));
     return this.httpClient.post<Produto>(
       this.BASE_URL,
       JSON.stringify(produto),
