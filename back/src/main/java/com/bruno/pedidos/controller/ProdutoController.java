@@ -47,10 +47,10 @@ public class ProdutoController {
         return produtoRepository.save(produto); 
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Produto> remover(@RequestBody Produto produto) {
-        produtoRepository.deleteById(produto.getId());
+    public List<Produto> remover(@PathVariable("id") Long id) {
+        produtoRepository.deleteById(id);
         return produtoRepository.findAll(); 
     }
 }
