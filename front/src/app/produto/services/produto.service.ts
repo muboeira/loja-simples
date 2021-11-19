@@ -18,16 +18,16 @@ export class ProdutoService {
   }
 
   inserir(produto: Produto): Observable<Produto> {
-    console.log(JSON.stringify(produto));
     return this.httpClient.post<Produto>(
       this.BASE_URL,
       JSON.stringify(produto),
       this.httpOptions
     );
   }
-  /*remover(id: number): Observable<Usuario> {
-    return this.httpClient.delete<Usuario>(this.BASE_URL + id, this.httpOptions);
-  }*/
+
+  remover(id: number): Observable<Produto> {
+    return this.httpClient.delete<Produto>(this.BASE_URL + id, this.httpOptions);
+  }
 
   buscarPorId(id: number): Observable<Produto> {
     return this.httpClient.get<Produto>(this.BASE_URL + id,this.httpOptions);

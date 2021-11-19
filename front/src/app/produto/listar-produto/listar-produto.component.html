@@ -15,11 +15,15 @@
                 <a [routerLink]="['/produtos/editar/',produto.id]" href="#" title="Editar" alt="Editar" class="btn btn-xs btn-info">
                     <i class="fa fa-edit" aria-hidden="true"></i> Editar
                 </a>&nbsp;
-                <!--<a (click)="excluir($event, produto)" href="#" title="Remover" alt="Remover" class="btn btn-xs btn-danger">
+                <a (click)="remover($event, produto)" href="#" title="Remover" alt="Remover" class="btn btn-xs btn-danger">
                     <i class="fa fa-times" aria-hidden="true"></i> Remover
-                </a>-->
+                </a>
             </td>
+        </tr>
+        <tr>
+            <th>Total de Produtos</th>
+            <th class='center'> {{totalProdutos}} </th>
         </tr>
     </tbody>
 </table>
-<p *ngIf="!produtos">Nenhum produto cadastrada.</p>
+<p *ngIf="!produtos">Nenhum produto cadastrado.</p>

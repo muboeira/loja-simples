@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ProdutoService } from '../services/produto.service';
 import { Produto } from '../../shared/models/produto.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-listar-produto',
@@ -10,8 +12,12 @@ import { Produto } from '../../shared/models/produto.model';
 })
 export class ListarProdutoComponent implements OnInit {
   produtos!: Produto[];
+  totalProdutos!: Number;
 
-  constructor(private produtoService: ProdutoService) {}
+  constructor(
+    private produtoService: ProdutoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.produtos = this.listarTodos();
@@ -24,6 +30,7 @@ export class ListarProdutoComponent implements OnInit {
           this.produtos = [];
         } else {
           this.produtos = data;
+          this.totalProdutos = data.length; 
         }
       }
     });
@@ -31,7 +38,7 @@ export class ListarProdutoComponent implements OnInit {
     return this.produtos;
   }
 
-  /*excluir($event: any, produto: Produto): void {
+  remover($event: any, produto: Produto): void {
     $event.preventDefault();
     if (
       confirm(
@@ -39,8 +46,12 @@ export class ListarProdutoComponent implements OnInit {
       ) &&
       produto.id
     ) {
-      this.produtoService.remover(produto.id);
-      this.produtos = this.listarTodos();
+      this.produtoService.remover(produto.id).subscribe({
+        next: (data: Produto) => {
+          //this.router.navigate(['/produtos']);
+          this.listarTodos();
+        }
+      });   
     }
-  }*/
+  }
 }
