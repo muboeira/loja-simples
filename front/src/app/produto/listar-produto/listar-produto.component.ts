@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ProdutoService } from '../services/produto.service';
 import { Produto } from '../../shared/models/produto.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { HttpResponse } from '../../shared/models/http-response';
 
 @Component({
   selector: 'app-listar-produto',
@@ -47,9 +47,12 @@ export class ListarProdutoComponent implements OnInit {
       produto.id
     ) {
       this.produtoService.remover(produto.id).subscribe({
-        next: (data: Produto) => {
-          //this.router.navigate(['/produtos']);
-          this.listarTodos();
+        next: (data: HttpResponse) => {
+          if(data.status == 'OK') {
+            this.router.navigate(['/produtos']);
+          }else {
+            alert(data.message)
+          }
         }
       });   
     }

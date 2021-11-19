@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Produto } from '../../shared/models/produto.model';
 import { ProdutoService } from '../services/produto.service';
+import { HttpResponse } from '../../shared/models/http-response';
 
 @Component({
   selector: 'app-editar-produto',
@@ -42,8 +43,13 @@ export class EditarProdutoComponent implements OnInit {
   atualizar(): void {
     if (this.formProduto.form.valid && this.produto) {
       this.produtoService.atualizar(this.produto).subscribe({
-        next: (data: Produto) => {
-          this.router.navigate(['/produtos']);
+        next: (data: HttpResponse) => {
+          console.log(data);
+          if(data.status == 'OK') {
+            this.router.navigate(['/produtos']);
+          }else {
+            alert(data.message);
+          }
         }
       });
     }

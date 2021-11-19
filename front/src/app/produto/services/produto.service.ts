@@ -15,6 +15,7 @@ export class ProdutoService {
   httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   listarTodos(): Observable<Produto[]> {
+    console.log(this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions));
     return this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions);
   }
 
@@ -26,16 +27,16 @@ export class ProdutoService {
     );
   }
 
-  remover(id: number): Observable<Produto> {
-    return this.httpClient.delete<Produto>(this.BASE_URL + id, this.httpOptions);
+  remover(id: number): Observable<HttpResponse> {
+    return this.httpClient.delete<HttpResponse>(this.BASE_URL + id, this.httpOptions);
   }
 
   buscarPorId(id: number): Observable<Produto> {
     return this.httpClient.get<Produto>(this.BASE_URL + id,this.httpOptions);
   }
   
-  atualizar(produto: Produto): Observable<Produto> {
-    return this.httpClient.put<Produto>(
+  atualizar(produto: Produto): Observable<HttpResponse> {
+    return this.httpClient.put<HttpResponse>(
       this.BASE_URL,
       JSON.stringify(produto),
       this.httpOptions
