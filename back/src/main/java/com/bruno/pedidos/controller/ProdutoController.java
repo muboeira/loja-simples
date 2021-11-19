@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 import java.util.Optional;
 
 import com.bruno.pedidos.model.HttpResponse;
@@ -27,14 +26,28 @@ public class ProdutoController {
     private ProdutoRepository produtoRepository;
     
     @GetMapping("/")
-    public List<Produto> listar() {
-        return produtoRepository.findAll();
+    public ResponseEntity<?> listar() {
+        HttpResponse response = new HttpResponse();
+        response.setStatus(HttpStatus.OK);
+
+        return new ResponseEntity<>(produtoRepository.findAll(), response.getStatus());
     }
 
     @GetMapping("/{id}")
-    public Optional<Produto> listarPorId(@PathVariable("id") Long id) {
-        Optional<Produto> produto = produtoRepository.findById(id);
-        return produto;
+    public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
+        HttpResponse response = new HttpResponse();
+
+        try {
+            Optional<Produto> produto = produtoRepository.findById(id);
+            response.setStatus(HttpStatus.OK);
+            
+            return new ResponseEntity<>(produto, response.getStatus());
+        }catch(Exception e) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    
+            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+        }
+
     }
 
     @PostMapping
@@ -42,29 +55,60 @@ public class ProdutoController {
     public ResponseEntity<?> cadastrar(@RequestBody Produto produto) {
         HttpResponse response = new HttpResponse();
 
-        Produto novoProduto = produtoRepository.save(produto);
-        if(novoProduto.getId() > 0) {
+        try {
+            produtoRepository.save(produto);
             response.setStatus(HttpStatus.CREATED);
             response.setMessage("Produto cadastrado com sucesso.");
-        }else {
-            //tratar erros, ex: nome duplicado
+
+            return new ResponseEntity<>(response, response.getStatus());
+        }catch(Exception e) {
+            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
             //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
-        }
 
-        return new ResponseEntity<>(response, response.getStatus());
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+
+            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+        }
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto atualizar(@RequestBody Produto produto) {
-        return produtoRepository.save(produto); 
+    public ResponseEntity<?> atualizar(@RequestBody Produto produto) {
+        HttpResponse response = new HttpResponse();
+
+        try {
+            produtoRepository.save(produto);
+            response.setStatus(HttpStatus.OK);
+            response.setMessage("Produto atualizado com sucesso.");
+
+            return new ResponseEntity<>(response, response.getStatus());
+        }catch(Exception e) {
+            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
+            //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
+
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+
+            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+        }
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Produto> remover(@PathVariable("id") Long id) {
-        produtoRepository.deleteById(id);
-        return produtoRepository.findAll(); 
+    public ResponseEntity<?> remover(@PathVariable("id") Long id) {
+        HttpResponse response = new HttpResponse();
+
+        try {
+            produtoRepository.deleteById(id);
+            response.setStatus(HttpStatus.OK);
+            response.setMessage("Produto deletado com sucesso.");
+
+            return new ResponseEntity<>(response, response.getStatus());
+        }catch(Exception e) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+
+            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+        }
     }
 }
