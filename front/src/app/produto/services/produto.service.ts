@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Produto } from '../../shared/models/produto.model';
 import { HttpClient, HttpHeaders} from'@angular/common/http';
+import { HttpResponse } from '../../shared/models/http-response';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,8 +18,8 @@ export class ProdutoService {
     return this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions);
   }
 
-  inserir(produto: Produto): Observable<Produto> {
-    return this.httpClient.post<Produto>(
+  inserir(produto: Produto): Observable<HttpResponse> {
+    return this.httpClient.post<HttpResponse>(
       this.BASE_URL,
       JSON.stringify(produto),
       this.httpOptions

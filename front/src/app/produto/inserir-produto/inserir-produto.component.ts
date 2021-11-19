@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Produto } from '../../shared/models/produto.model';
 import { ProdutoService } from '../services/produto.service';
+import { HttpResponse } from '../../shared/models/http-response';
+
 
 @Component({
   selector: 'app-inserir-produto',
@@ -13,6 +15,7 @@ export class InserirProdutoComponent implements OnInit {
   @ViewChild('formProduto') formProduto!: NgForm;
 
   produto!: Produto;
+  errorMessage!: String;
 
   constructor(
     private produtoService: ProdutoService,
@@ -26,8 +29,12 @@ export class InserirProdutoComponent implements OnInit {
   inserir(): void {
     if (this.formProduto.form.valid && this.produto) {
       this.produtoService.inserir(this.produto).subscribe({
-        next: (data: Produto) => {
-          this.router.navigate(['/produtos']);
+        next: (data: HttpResponse) => {
+          if(data.status == 'CREATED') {
+            this.router.navigate(['/produtos']);
+          }else {
+            this.errorMessage = data.message;
+          }
         }
       });
     }

@@ -11,6 +11,9 @@
                     O produto deve conter ao menos 3 caracteres.
                 </div>
             </div>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>
         </div><br>
         <div class="row">
             <button type="button" class="btn btn-primary" (click)="inserir()" [disabled]="!formProduto.form.valid">
