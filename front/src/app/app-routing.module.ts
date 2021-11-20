@@ -11,6 +11,11 @@ import { ListarPedidoComponent } from './pedido/listar-pedido/listar-pedido.comp
 import { InserirPedidoComponent } from './pedido/inserir-pedido/inserir-pedido.component';
 import { EditarPedidoComponent } from './pedido/editar-pedido/editar-pedido.component';
 
+//Cliente
+import { ListarClienteComponent } from './cliente/listar-cliente/listar-cliente.component';
+import { InserirClienteComponent } from './cliente/inserir-cliente/inserir-cliente.component';
+import { EditarClienteComponent } from './cliente/editar-cliente/editar-cliente.component';
+
 const produtosRoutes: Routes = [
   { path: 'produtos', redirectTo: 'produtos/listar', pathMatch: 'full' },
   { path: 'produtos/listar', component: ListarProdutoComponent },
@@ -18,21 +23,29 @@ const produtosRoutes: Routes = [
   { path: 'produtos/editar/:produtoId', component: EditarProdutoComponent },
 ];
 
+const clientesRoutes: Routes = [
+  { path: 'clientes', redirectTo: 'clientes/listar', pathMatch: 'full' },
+  { path: 'clientes/listar', component: ListarClienteComponent },
+  { path: 'clientes/novo', component: InserirClienteComponent },
+  { path: 'clientes/editar/:clienteId', component: EditarClienteComponent },
+];
+
 const pedidosRoutes: Routes = [
   { path: 'pedidos', redirectTo: 'pedidos/listar', pathMatch: 'full' },
   { path: 'pedidos/listar', component: ListarPedidoComponent },
   { path: 'pedidos/novo', component: InserirPedidoComponent },
-  { path: 'pedidos/editar/:pedidoId', component: EditarPedidoComponent }
-]
+  { path: 'pedidos/editar/:pedidoId', component: EditarPedidoComponent },
+];
 
 const routes: Routes = [
   { path: '', redirectTo: 'produtos/listar', pathMatch: 'full' },
   ...produtosRoutes,
-  ...pedidosRoutes
+  ...clientesRoutes,
+  ...pedidosRoutes,
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

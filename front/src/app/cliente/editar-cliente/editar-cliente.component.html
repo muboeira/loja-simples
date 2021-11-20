@@ -1,0 +1,96 @@
+<h1>Editar Cliente</h1>
+<div class="well">
+  <form #formCliente="ngForm">
+    <div class="row">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input
+          [(ngModel)]="cliente.nome"
+          #nome="ngModel"
+          type="text"
+          class="form-control"
+          id="nome"
+          name="nome"
+          minlength="3"
+          required
+        />
+        <div
+          *ngIf="nome.errors && (nome.dirty || nome.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!nome.errors.required">Digite o nome do cliente.</div>
+          <div [hidden]="!nome.errors.minlength">
+            O nome do cliente deve conter ao menos 3 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="sobrenome">Sobrenome:</label>
+        <input
+          [(ngModel)]="cliente.sobrenome"
+          #sobrenome="ngModel"
+          type="text"
+          class="form-control"
+          id="sobrenome"
+          name="sobrenome"
+          minlength="3"
+          required
+        />
+        <div
+          *ngIf="sobrenome.errors && (sobrenome.dirty || sobrenome.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!sobrenome.errors.required">
+            Digite o sobrenome do cliente.
+          </div>
+          <div [hidden]="!sobrenome.errors.minlength">
+            O sobrenome do cliente deve conter ao menos 3 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="cpf">Cpf:</label>
+        <input
+          [(ngModel)]="cliente.cpf"
+          #cpf="ngModel"
+          type="number"
+          class="form-control"
+          id="cpf"
+          name="cpf"
+          minlength="11"
+          maxlength="11"
+          required
+        />
+        <div
+          *ngIf="cpf.errors && (cpf.dirty || cpf.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!cpf.errors.required">Digite o cpf do cliente.</div>
+          <div [hidden]="!cpf.errors.minlength">
+            O cpf do cliente deve conter ao menos 11 caracteres.
+          </div>
+          <div [hidden]="!cpf.errors.maxlength">
+            O cpf do cliente deve conter no máximo 11 caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="atualizar()"
+        [disabled]="!formCliente.form.valid"
+      >
+        <i class="fa fa-save" aria-hidden="true"></i> Salvar
+      </button>
+      <a [routerLink]="['/clientes']" class="btn btn-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+      </a>
+    </div>
+  </form>
+</div>

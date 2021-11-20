@@ -7,21 +7,20 @@ import { HeaderComponent } from './header/header.component';
 
 import { ProdutoModule } from './produto/produto.module';
 import { PedidoModule } from './pedido/pedido.module';
+import { ClienteModule } from './cliente/cliente.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProdutoModule,
     PedidoModule,
-    HttpClientModule
+    ClienteModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
