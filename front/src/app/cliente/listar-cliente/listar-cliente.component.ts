@@ -9,6 +9,7 @@ import { Cliente } from 'src/app/shared/models/cliente.model';
 })
 export class ListarClienteComponent implements OnInit {
   clientes!: Cliente[];
+  totalClientes!: Number;
 
   constructor(private clienteService: ClienteService) {}
 
@@ -23,6 +24,7 @@ export class ListarClienteComponent implements OnInit {
           this.clientes = [];
         } else {
           this.clientes = data;
+          this.totalClientes = data.length; 
         }
       },
     });
