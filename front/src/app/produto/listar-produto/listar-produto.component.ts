@@ -50,7 +50,6 @@ export class ListarProdutoComponent implements OnInit {
         next: (data: HttpResponse) => {
           console.log(data);
           if(data.status == 'OK') {
-            //this.router.navigate(['/produtos']);
             this.listarTodos();
           }else {
             alert(data.message)
