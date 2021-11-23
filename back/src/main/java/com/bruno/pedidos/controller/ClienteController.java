@@ -51,7 +51,6 @@ public class ClienteController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> cadastrar(@RequestBody Cliente cliente) {
         HttpResponse response = new HttpResponse();
 
@@ -73,7 +72,6 @@ public class ClienteController {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> atualizar(@RequestBody Cliente cliente) {
         HttpResponse response = new HttpResponse();
 
@@ -95,7 +93,6 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> remover(@PathVariable("id") Long id) {
         HttpResponse response = new HttpResponse();
 
