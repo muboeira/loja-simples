@@ -98,6 +98,11 @@ public class ClienteController {
         HttpResponse response = new HttpResponse();
 
         try {
+
+            if(clienteRepository.verificaPedidoCliente(id) > 0) {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setMessage("Não foi possível deletar o Cliente. Ele possui pedidos cadastrados no sistema.");
+            }
             clienteRepository.deleteById(id);
             response.setStatus(HttpStatus.OK);
             response.setMessage("Cliente deletado com sucesso.");
