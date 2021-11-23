@@ -14,6 +14,7 @@ export class EditarClienteComponent implements OnInit {
   @ViewChild('formCliente') formCliente!: NgForm;
 
   cliente!: Cliente;
+  errorMessage!: String;
 
   constructor(
     private clienteService: ClienteService,
@@ -47,7 +48,7 @@ export class EditarClienteComponent implements OnInit {
           if (data.status == 'OK') {
             this.router.navigate(['/clientes']);
           } else {
-            alert(data.message);
+            this.errorMessage = data.message;
           }
         },
       });

@@ -20,7 +20,7 @@
     <tr *ngFor="let cliente of clientes">
       <td>{{ cliente.nome }}</td>
       <td>{{ cliente.sobrenome }}</td>
-      <td>{{ cliente.cpf }}</td>
+      <td>{{ cliente.cpf | mask: '000.000.000-00'}}</td>
       <td class="text-center" style="width: 300px">
         <a
           [routerLink]="['/clientes/editar/', cliente.id]"

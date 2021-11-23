@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group">
+      <div class="form-group col-xs-12 col-md-4">
         <label for="nome">Nome:</label>
         <input
           [(ngModel)]="cliente.nome"
@@ -29,9 +29,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
+      <div class="form-group col-xs-12 col-md-4">
         <label for="sobrenome">Sobrenome:</label>
         <input
           [(ngModel)]="cliente.sobrenome"
@@ -55,37 +53,42 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="cpf">Cpf:</label>
+      <div class="form-group col-xs-12 col-md-4">
+        <label for="cpf">CPF:</label>
         <input
           [(ngModel)]="cliente.cpf"
           #cpf="ngModel"
-          type="number"
+          type="text"
           class="form-control"
           id="cpf"
           name="cpf"
           minlength="11"
-          maxlength="11"
+          maxlength="14"
+          mask="000.000.000-00"
           required
         />
         <div
           *ngIf="cpf.errors && (cpf.dirty || cpf.touched)"
           class="alert alert-danger"
         >
-          <div [hidden]="!cpf.errors.required">Digite o cpf do cliente.</div>
+          <div [hidden]="!cpf.errors.required">Digite o CPF do cliente.</div>
           <div [hidden]="!cpf.errors.minlength">
-            O cpf do cliente deve conter ao menos 11 caracteres.
+            O CPF do cliente deve conter ao menos 11 caracteres.
           </div>
           <div [hidden]="!cpf.errors.maxlength">
-            O cpf do cliente deve conter no máximo 11 caracteres.
+            O CPF do cliente deve conter no máximo 11 caracteres.
           </div>
         </div>
       </div>
-    </div>
+    </div><br>
     <div class="row">
-      <button
+      <div class='col-xs-12 col-md-6 right'>
+        <a [routerLink]="['/clientes']" class="btn btn-secondary">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+        </a>
+      </div>
+      <div class='col-xs-12 col-md-6 left'>
+        <button
         type="button"
         class="btn btn-primary"
         (click)="inserir()"
@@ -93,9 +96,7 @@
       >
         <i class="fa fa-save" aria-hidden="true"></i> Salvar
       </button>
-      <a [routerLink]="['/clientes']" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
-      </a>
-    </div>
+      </div>
+  </div>
   </form>
 </div>

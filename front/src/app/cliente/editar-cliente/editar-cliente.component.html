@@ -1,8 +1,13 @@
-<h1>Editar Cliente</h1>
+<h1>Novo Cliente</h1>
 <div class="well">
   <form #formCliente="ngForm">
     <div class="row">
-      <div class="form-group">
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-md-4">
         <label for="nome">Nome:</label>
         <input
           [(ngModel)]="cliente.nome"
@@ -24,9 +29,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
+      <div class="form-group col-xs-12 col-md-4">
         <label for="sobrenome">Sobrenome:</label>
         <input
           [(ngModel)]="cliente.sobrenome"
@@ -50,19 +53,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="cpf">Cpf:</label>
+      <div class="form-group col-xs-12 col-md-4">
+        <label for="cpf">CPF:</label>
         <input
           [(ngModel)]="cliente.cpf"
           #cpf="ngModel"
-          type="number"
+          type="text"
           class="form-control"
           id="cpf"
           name="cpf"
           minlength="11"
-          maxlength="11"
+          maxlength="14"
+          mask="000.000.000-00"
           required
         />
         <div
@@ -78,9 +80,15 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><br>
     <div class="row">
-      <button
+      <div class='col-xs-12 col-md-6 right'>
+        <a [routerLink]="['/clientes']" class="btn btn-secondary">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+        </a>
+      </div>
+      <div class='col-xs-12 col-md-6 left'>
+        <button
         type="button"
         class="btn btn-primary"
         (click)="atualizar()"
@@ -88,9 +96,7 @@
       >
         <i class="fa fa-save" aria-hidden="true"></i> Salvar
       </button>
-      <a [routerLink]="['/clientes']" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
-      </a>
-    </div>
+      </div>
+  </div>
   </form>
 </div>

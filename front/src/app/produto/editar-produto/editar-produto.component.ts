@@ -15,6 +15,7 @@ export class EditarProdutoComponent implements OnInit {
   @ViewChild('formProduto') formProduto!: NgForm;
 
   produto!: Produto;
+  errorMessage!: String;
 
   constructor(
     private produtoService: ProdutoService,
@@ -48,7 +49,7 @@ export class EditarProdutoComponent implements OnInit {
           if(data.status == 'OK') {
             this.router.navigate(['/produtos']);
           }else {
-            alert(data.message);
+            this.errorMessage = data.message;
           }
         }
       });
