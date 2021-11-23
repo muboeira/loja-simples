@@ -1,6 +1,9 @@
 import { ClienteService } from './../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from 'src/app/shared/models/cliente.model';
+import { Router } from '@angular/router';
+import { HttpResponse } from '../../shared/models/http-response';
+
 
 @Component({
   selector: 'app-listar-cliente',
@@ -11,7 +14,10 @@ export class ListarClienteComponent implements OnInit {
   clientes!: Cliente[];
   totalClientes!: Number;
 
-  constructor(private clienteService: ClienteService) {}
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.clientes = this.listarTodos();
@@ -30,5 +36,25 @@ export class ListarClienteComponent implements OnInit {
     });
 
     return this.clientes;
+  }
+
+  remover($event: any, cliente: Cliente): void {
+    $event.preventDefault();
+    if (
+      confirm(
+        'Deseja realmente remover o cliente "' + cliente.nome + '"?'
+      ) &&
+      cliente.id
+    ) {
+      this.clienteService.remover(cliente.id).subscribe({
+        next: (data: HttpResponse) => {
+          if(data.status == 'OK') {
+            this.listarTodos();
+          }else {
+            alert(data.message)
+          }
+        }
+      });   
+    }
   }
 }

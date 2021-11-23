@@ -4,7 +4,7 @@
     <tr>
       <th>Nome</th>
       <th>Sobrenome</th>
-      <th>Cpf</th>
+      <th>CPF</th>
       <th class="text-center">
         <a
           [routerLink]="['/clientes/novo']"
@@ -31,15 +31,15 @@
         >
           <i class="fa fa-edit" aria-hidden="true"></i> Editar </a
         >&nbsp;
-        <!-- <a
-          (click)="excluir($event, cliente)"
+        <a
+          (click)="remover($event, cliente)"
           href="#"
           title="Remover"
           alt="Remover"
           class="btn btn-xs btn-danger"
         >
           <i class="fa fa-times" aria-hidden="true"></i> Remover
-        </a> -->
+        </a> 
       </td>
     </tr>
     <tr>
