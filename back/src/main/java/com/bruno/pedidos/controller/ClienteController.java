@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 import java.util.Optional;
 
 import com.bruno.pedidos.model.Cliente;
@@ -55,18 +53,19 @@ public class ClienteController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setMessage("Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema");
+                return new ResponseEntity<>(response, response.getStatus());
+            }
+
             clienteRepository.save(cliente);
             response.setStatus(HttpStatus.CREATED);
             response.setMessage("Cliente cadastrado com sucesso.");
 
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
-            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
-            //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
-
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
             return new ResponseEntity<>(e.getMessage(), response.getStatus());
         }
     }
@@ -76,16 +75,18 @@ public class ClienteController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setMessage("Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema");
+                return new ResponseEntity<>(response, response.getStatus());
+            }
+
             clienteRepository.save(cliente);
             response.setStatus(HttpStatus.OK);
             response.setMessage("Produto atualizado com sucesso.");
 
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
-            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
-            //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
-
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 
             return new ResponseEntity<>(e.getMessage(), response.getStatus());
