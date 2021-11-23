@@ -33,6 +33,9 @@ export class ListarClienteComponent implements OnInit {
           this.totalClientes = data.length; 
         }
       },
+      error: (erro: any) => {
+        alert(erro.message)
+      }
     });
 
     return this.clientes;
@@ -50,9 +53,10 @@ export class ListarClienteComponent implements OnInit {
         next: (data: HttpResponse) => {
           if(data.status == 'OK') {
             this.listarTodos();
-          }else {
-            alert(data.message)
           }
+        },
+        error: (erro: any) => {
+          alert(erro.message)
         }
       });   
     }

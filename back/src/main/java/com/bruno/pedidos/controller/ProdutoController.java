@@ -55,16 +55,18 @@ public class ProdutoController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(produtoRepository.verificaProdutoExistente(produto.getId(), produto.getDescricao()) > 0) {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
+                return new ResponseEntity<>(response, response.getStatus());
+            }
+
             produtoRepository.save(produto);
             response.setStatus(HttpStatus.CREATED);
             response.setMessage("Produto cadastrado com sucesso.");
 
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
-            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
-            //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
-
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 
             return new ResponseEntity<>(e.getMessage(), response.getStatus());
@@ -76,16 +78,18 @@ public class ProdutoController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(produtoRepository.verificaProdutoExistente(produto.getId(), produto.getDescricao()) > 0) {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
+                return new ResponseEntity<>(response, response.getStatus());
+            }
+
             produtoRepository.save(produto);
             response.setStatus(HttpStatus.OK);
             response.setMessage("Produto atualizado com sucesso.");
 
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
-            //talvez tratar erros com funções customizadas nos arquivos repository, ex: nome duplicado
-            //response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            //response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Produto com esse nome já existe!");
-
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 
             return new ResponseEntity<>(e.getMessage(), response.getStatus());

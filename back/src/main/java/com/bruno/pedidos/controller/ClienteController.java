@@ -55,7 +55,7 @@ public class ClienteController {
         try {
             if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
                 response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema");
+                response.setMessage("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
                 return new ResponseEntity<>(response, response.getStatus());
             }
 
@@ -77,7 +77,7 @@ public class ClienteController {
         try {
             if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
                 response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema");
+                response.setMessage("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
                 return new ResponseEntity<>(response, response.getStatus());
             }
 
@@ -101,7 +101,7 @@ public class ClienteController {
 
             if(clienteRepository.verificaPedidoCliente(id) > 0) {
                 response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Não foi possível deletar o Cliente. Ele possui pedidos cadastrados no sistema.");
+                response.setMessage("Erro ao deletar o Cliente. Motivo: Ele possui pedidos cadastrados no sistema.");
             }
             clienteRepository.deleteById(id);
             response.setStatus(HttpStatus.OK);

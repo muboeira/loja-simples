@@ -48,9 +48,10 @@ export class EditarProdutoComponent implements OnInit {
           console.log(data);
           if(data.status == 'OK') {
             this.router.navigate(['/produtos']);
-          }else {
-            this.errorMessage = data.message;
           }
+        },
+        error: (erro: any) => {
+          this.errorMessage = erro.error.message;
         }
       });
     }

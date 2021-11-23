@@ -1,4 +1,7 @@
 <h1>Novo Produto</h1>
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{errorMessage}}
+</div>
 <div class="well">
     <form #formProduto="ngForm">
         <div class="form-group center">
@@ -10,9 +13,6 @@
                 <div [hidden]="!descricao.errors.minlength">
                     O produto deve conter ao menos 3 caracteres.
                 </div>
-            </div>
-            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-                {{errorMessage}}
             </div>
         </div><br>
         <div class="row">
