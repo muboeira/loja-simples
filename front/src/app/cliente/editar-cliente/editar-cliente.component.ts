@@ -44,13 +44,13 @@ export class EditarClienteComponent implements OnInit {
     if (this.formCliente.form.valid && this.cliente) {
       this.clienteService.atualizar(this.cliente).subscribe({
         next: (data: HttpResponse) => {
-          console.log(data);
           if (data.status == 'OK') {
             this.router.navigate(['/clientes']);
-          } else {
-            this.errorMessage = data.message;
           }
         },
+        error: (erro: any) => {
+          this.errorMessage = erro.error.message;
+        }
       });
     }
   }

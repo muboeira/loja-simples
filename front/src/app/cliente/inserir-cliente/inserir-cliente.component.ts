@@ -28,10 +28,11 @@ export class InserirClienteComponent implements OnInit {
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {
             this.router.navigate(['/clientes']);
-          } else {
-            this.errorMessage = data.message;
           }
         },
+        error: (erro: any) => {
+          this.errorMessage = erro.error.message;
+        }
       });
     }
   }
