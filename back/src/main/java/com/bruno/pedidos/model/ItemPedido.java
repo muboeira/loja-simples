@@ -20,7 +20,7 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
-    @JsonIgnoreProperties("itensPedido")
+    @JsonIgnoreProperties(value = {"itensPedido"}, allowSetters = true)
     private Pedido pedido;
 
     @OneToOne

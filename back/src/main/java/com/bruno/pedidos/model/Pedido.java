@@ -29,7 +29,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.MERGE)
-    @JsonIgnoreProperties("pedido")
+    @JsonIgnoreProperties(value = {"pedido"}, allowSetters = true)
     private List<ItemPedido> itensPedido;
 
     public Long getId() {
