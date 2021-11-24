@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.bruno.pedidos.model.HttpResponse;
 import com.bruno.pedidos.model.ItemPedido;
@@ -37,6 +38,23 @@ public class PedidoController {
         response.setStatus(HttpStatus.OK);
 
         return new ResponseEntity<>(pedidoRepository.findAll(), response.getStatus());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarPorId(@PathVariable("id") Long id) {
+        HttpResponse response = new HttpResponse();
+
+        try {
+            Optional<Pedido> pedido = pedidoRepository.findById(id);
+            response.setStatus(HttpStatus.OK);
+            
+            return new ResponseEntity<>(pedido, response.getStatus());
+        }catch(Exception e) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    
+            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+        }
+
     }
 
     @PostMapping
