@@ -62,10 +62,23 @@ public class PedidoController {
         HttpResponse response = new HttpResponse();
 
         try{
+            if(pedido.getCliente() == null) {
+                throw new Exception("Informe um cliente para o pedido!");
+            }
             List<ItemPedido> itensPedidoCreated = pedido.getItensPedido();
             if(itensPedidoCreated == null) {
-                throw new Exception("Pedido sem itens!");
-            } 
+                throw new Exception("Informe ao menos um item para o pedido!");
+            }
+            for (ItemPedido itemPedido : itensPedidoCreated) {
+                if(itemPedido.getQuantidade() <= 0) {
+                    throw new Exception("Item '" + itemPedido.getItem().getDescricao() + "' com quantidade menor ou igual a zero!");
+                }
+            }
+
+            if(pedido.getData() == null || pedido.getData() == "") {
+                throw new Exception("Informe a data do pedido!");
+            }
+
             Pedido pedidoCreated = pedidoRepository.save(pedido);
             List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
             for (ItemPedido itemPedido : itensPedidoCreated) {
@@ -90,8 +103,24 @@ public class PedidoController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(pedido.getCliente() == null) {
+                throw new Exception("Informe um cliente para o pedido!");
+            }
+            List<ItemPedido> itensPedidoCreated = pedido.getItensPedido();
+            if(itensPedidoCreated == null) {
+                throw new Exception("Informe ao menos um item para o pedido!");
+            }
+            for (ItemPedido itemPedido : itensPedidoCreated) {
+                if(itemPedido.getQuantidade() <= 0) {
+                    throw new Exception("Item '" + itemPedido.getItem().getDescricao() + "' com quantidade menor ou igual a zero!");
+                }
+            }
+
+            if(pedido.getData() == null || pedido.getData() == "") {
+                throw new Exception("Informe a data do pedido!");
+            }
+
             Pedido pedidoCreated = pedidoRepository.save(pedido);
-            List<ItemPedido> itensPedidoCreated = pedido.getItensPedido(); 
             List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
             for (ItemPedido itemPedido : itensPedidoCreated) {
                 itemPedido.setPedido(pedidoCreated);
