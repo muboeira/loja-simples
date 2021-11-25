@@ -89,7 +89,7 @@ export class InserirPedidoComponent implements OnInit {
   
   inserir(){
     if (this.formPedido.form.valid && this.pedido) {
-      this.pedido.data = '24/11/2021';
+      //this.pedido.data = '24/11/2021'; para testes
       this.pedidoService.inserir(this.pedido).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {
@@ -97,7 +97,6 @@ export class InserirPedidoComponent implements OnInit {
           }
         },
         error: (erro: any) => {
-          console.log(erro);
           this.errorMessage = erro.error.message;
         }
       });
