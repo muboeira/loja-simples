@@ -1,6 +1,7 @@
 import { PedidoService } from './../services/pedido.service';
 import { Component, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/shared/models/pedido.model';
+import { Cliente } from 'src/app/shared/models/cliente.model';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -9,6 +10,7 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
 })
 export class ListarPedidoComponent implements OnInit {
   pedidos!: Pedido[];
+  totalPedidos!: Number;
 
   constructor(private pedidoService: PedidoService) { }
 
@@ -23,11 +25,19 @@ export class ListarPedidoComponent implements OnInit {
           this.pedidos = [];
         } else {
           this.pedidos = data;
+          this.totalPedidos = data.length; 
         }
+      },
+      error: (erro: any) => {
+        alert(erro.message)
       }
     });
 
     return this.pedidos;
+  }
+
+  getInfoCliente(cliente?: Cliente): String {
+    return new Pedido().getInfoCliente(cliente);
   }
 
 }

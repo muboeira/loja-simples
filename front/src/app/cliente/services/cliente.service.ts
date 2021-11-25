@@ -17,9 +17,6 @@ export class ClienteService {
   };
 
   listarTodos(): Observable<Cliente[]> {
-    console.log(
-      this.httpClient.get<Cliente[]>(this.BASE_URL, this.httpOptions)
-    );
     return this.httpClient.get<Cliente[]>(this.BASE_URL, this.httpOptions);
   }
 

@@ -10,7 +10,7 @@ import { HttpResponse } from '../../shared/models/http-response';
 })
 export class PedidoService {
   constructor(private httpClient: HttpClient) { }
-  BASE_URL = "http://localhost:8080/pedido";
+  BASE_URL = "http://localhost:8080/pedido/";
   httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   listarTodos(): Observable<Pedido[]> {

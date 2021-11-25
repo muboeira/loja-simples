@@ -7,4 +7,9 @@ export class Pedido {
         public cliente?: Cliente,
         public itensPedido?: ItemPedido[]
     ) {}
+
+    public getInfoCliente(cliente?: Cliente): String {
+        console.log(cliente);
+        return cliente?.cpf + ' - ' + cliente?.nome + ' ' + cliente?.sobrenome;
+    }
 }
