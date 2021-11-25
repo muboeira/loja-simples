@@ -25,4 +25,11 @@ export class PedidoService {
       this.httpOptions
     );
   }
+
+  remover(id: number): Observable<HttpResponse> {
+    return this.httpClient.delete<HttpResponse>(
+      this.BASE_URL + id,
+      this.httpOptions
+    );
+  }
 }

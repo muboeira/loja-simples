@@ -2,6 +2,7 @@ import { PedidoService } from './../services/pedido.service';
 import { Component, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/shared/models/pedido.model';
 import { Cliente } from 'src/app/shared/models/cliente.model';
+import { HttpResponse } from '../../shared/models/http-response';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -34,6 +35,27 @@ export class ListarPedidoComponent implements OnInit {
     });
 
     return this.pedidos;
+  }
+
+  remover($event: any, pedido: Pedido): void {
+    $event.preventDefault();
+    if (
+      confirm(
+        'Deseja realmente remover o pedido id "' + pedido.id + '"?'
+      ) &&
+      pedido.id
+    ) {
+      this.pedidoService.remover(pedido.id).subscribe({
+        next: (data: HttpResponse) => {
+          if(data.status == 'OK') {
+            this.listarTodos();
+          }
+        },
+        error: (erro: any) => {
+          alert(erro.message);
+        }
+      });   
+    }
   }
 
   getInfoCliente(cliente?: Cliente): String {

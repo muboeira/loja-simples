@@ -112,6 +112,7 @@ public class PedidoController {
         HttpResponse response = new HttpResponse();
 
         try {
+            itemPedidoRepository.deleteByIdPedido(id);
             pedidoRepository.deleteById(id);
             response.setStatus(HttpStatus.OK);
             response.setMessage("Pedido deletado com sucesso.");
