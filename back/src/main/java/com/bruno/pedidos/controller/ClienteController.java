@@ -43,8 +43,8 @@ public class ClienteController {
             return new ResponseEntity<>(cliente, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-    
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -54,9 +54,7 @@ public class ClienteController {
 
         try {
             if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
-                return new ResponseEntity<>(response, response.getStatus());
+                throw new Exception("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
             }
 
             clienteRepository.save(cliente);
@@ -66,7 +64,8 @@ public class ClienteController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -76,9 +75,7 @@ public class ClienteController {
 
         try {
             if(clienteRepository.verificaCpfUnico(cliente.getCpf(), cliente.getId()) > 0) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
-                return new ResponseEntity<>(response, response.getStatus());
+                throw new Exception("Erro ao cadastrar o Cliente. Motivo: Já existe um cliente com o CPF " + cliente.getCpf() + " cadastrado no sistema.");
             }
 
             clienteRepository.save(cliente);
@@ -88,8 +85,8 @@ public class ClienteController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -100,8 +97,7 @@ public class ClienteController {
         try {
 
             if(clienteRepository.verificaPedidoCliente(id) > 0) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Erro ao deletar o Cliente. Motivo: Ele possui pedidos cadastrados no sistema.");
+                throw new Exception("Erro ao deletar o Cliente. Motivo: Ele possui pedidos cadastrados no sistema.");
             }
             clienteRepository.deleteById(id);
             response.setStatus(HttpStatus.OK);
@@ -110,8 +106,8 @@ public class ClienteController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 }

@@ -1,4 +1,7 @@
 <h1>Novo Pedido</h1>
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{errorMessage}}
+</div>
 <div class="well">
   <form #formPedido="ngForm">
     <div class="row">

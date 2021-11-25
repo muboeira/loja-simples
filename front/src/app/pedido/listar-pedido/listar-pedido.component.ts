@@ -30,7 +30,7 @@ export class ListarPedidoComponent implements OnInit {
         }
       },
       error: (erro: any) => {
-        alert(erro.message)
+        alert(erro.error.message)
       }
     });
 
@@ -52,7 +52,7 @@ export class ListarPedidoComponent implements OnInit {
           }
         },
         error: (erro: any) => {
-          alert(erro.message);
+          alert(erro.error.message);
         }
       });   
     }

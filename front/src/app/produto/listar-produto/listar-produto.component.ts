@@ -32,6 +32,9 @@ export class ListarProdutoComponent implements OnInit {
           this.produtos = data;
           this.totalProdutos = data.length; 
         }
+      },
+      error: (erro: any) => {
+        alert(erro.error.message)
       }
     });
 
@@ -50,9 +53,10 @@ export class ListarProdutoComponent implements OnInit {
         next: (data: HttpResponse) => {
           if(data.status == 'OK') {
             this.listarTodos();
-          }else {
-            alert(data.message)
           }
+        },
+        error: (erro: any) => {
+          alert(erro.error.message);
         }
       });   
     }

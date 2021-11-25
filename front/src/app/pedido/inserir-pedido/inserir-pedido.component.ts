@@ -96,6 +96,7 @@ export class InserirPedidoComponent implements OnInit {
           }
         },
         error: (erro: any) => {
+          console.log(erro);
           this.errorMessage = erro.error.message;
         }
       });

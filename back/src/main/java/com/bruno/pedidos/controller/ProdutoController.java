@@ -44,8 +44,8 @@ public class ProdutoController {
             return new ResponseEntity<>(produto, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-    
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
 
     }
@@ -56,9 +56,7 @@ public class ProdutoController {
 
         try {
             if(produtoRepository.verificaProdutoExistente(produto.getId(), produto.getDescricao()) > 0) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
-                return new ResponseEntity<>(response, response.getStatus());
+                throw new Exception("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
             }
 
             produtoRepository.save(produto);
@@ -68,8 +66,8 @@ public class ProdutoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -79,9 +77,7 @@ public class ProdutoController {
 
         try {
             if(produtoRepository.verificaProdutoExistente(produto.getId(), produto.getDescricao()) > 0) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                response.setMessage("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
-                return new ResponseEntity<>(response, response.getStatus());
+                throw new Exception("Erro ao cadastrar o produto " + produto.getDescricao() + ". Motivo: Já existe um produto com essa descrição.");
             }
 
             produtoRepository.save(produto);
@@ -91,8 +87,8 @@ public class ProdutoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -108,8 +104,8 @@ public class ProdutoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 }

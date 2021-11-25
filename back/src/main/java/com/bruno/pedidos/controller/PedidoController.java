@@ -51,8 +51,8 @@ public class PedidoController {
             return new ResponseEntity<>(pedido, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-    
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
 
     }
@@ -62,8 +62,11 @@ public class PedidoController {
         HttpResponse response = new HttpResponse();
 
         try{
+            List<ItemPedido> itensPedidoCreated = pedido.getItensPedido();
+            if(itensPedidoCreated == null) {
+                throw new Exception("Pedido sem itens!");
+            } 
             Pedido pedidoCreated = pedidoRepository.save(pedido);
-            List<ItemPedido> itensPedidoCreated = pedido.getItensPedido(); 
             List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
             for (ItemPedido itemPedido : itensPedidoCreated) {
                 itemPedido.setPedido(pedidoCreated);
@@ -77,8 +80,8 @@ public class PedidoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -102,8 +105,8 @@ public class PedidoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 
@@ -120,8 +123,8 @@ public class PedidoController {
             return new ResponseEntity<>(response, response.getStatus());
         }catch(Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-
-            return new ResponseEntity<>(e.getMessage(), response.getStatus());
+            response.setMessage(e.getMessage());
+            return new ResponseEntity<>(response, response.getStatus());
         }
     }
 }
