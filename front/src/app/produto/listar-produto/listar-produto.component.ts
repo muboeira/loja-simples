@@ -48,7 +48,6 @@ export class ListarProdutoComponent implements OnInit {
     ) {
       this.produtoService.remover(produto.id).subscribe({
         next: (data: HttpResponse) => {
-          console.log(data);
           if(data.status == 'OK') {
             this.listarTodos();
           }else {

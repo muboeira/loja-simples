@@ -15,7 +15,6 @@ export class ProdutoService {
   httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   listarTodos(): Observable<Produto[]> {
-    console.log(this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions));
     return this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions);
   }
 

@@ -18,6 +18,7 @@ export class PedidoService {
   }
 
   inserir(pedido: Pedido): Observable<HttpResponse> {
+    console.log(pedido);
     return this.httpClient.post<HttpResponse>(
       this.BASE_URL,
       JSON.stringify(pedido),

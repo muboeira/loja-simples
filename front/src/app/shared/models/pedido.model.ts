@@ -5,6 +5,6 @@ export class Pedido {
         public id: number = 0,
         public data: string = '',
         public cliente?: Cliente,
-        public itemPedido?: ItemPedido[]
+        public itensPedido?: ItemPedido[]
     ) {}
 }

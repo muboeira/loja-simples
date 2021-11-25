@@ -77,7 +77,7 @@ export class InserirPedidoComponent implements OnInit {
     // this.itensPedidos = [...this.itensPedidos, this.produtoSelecionado];
     this.itensPedidos.push(this.itemSelecionado);
     this.totalItens = this.itensPedidos.length;
-    this.pedido.itemPedido = this.itensPedidos;
+    this.pedido.itensPedido = this.itensPedidos;
     this.itemSelecionado = new ItemPedido();
     // console.log(this.itensPedidos);
     console.log(this.pedido);

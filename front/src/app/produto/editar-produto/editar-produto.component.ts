@@ -45,7 +45,6 @@ export class EditarProdutoComponent implements OnInit {
     if (this.formProduto.form.valid && this.produto) {
       this.produtoService.atualizar(this.produto).subscribe({
         next: (data: HttpResponse) => {
-          console.log(data);
           if(data.status == 'OK') {
             this.router.navigate(['/produtos']);
           }

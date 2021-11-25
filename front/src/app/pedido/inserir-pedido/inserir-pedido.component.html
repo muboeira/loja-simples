@@ -13,7 +13,7 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="descricao">Selecione os produtos</label>
-              <select class="form-control" name="produto" [(ngModel)]="itemSelecionado.produto">
+              <select class="form-control" name="produto" [(ngModel)]="itemSelecionado.item">
                 <option selected="selected" disabled>Produtos</option>
                 <option *ngFor="let produto of produtos" [ngValue]="produto">{{ produto.descricao }}</option>
               </select>
@@ -40,7 +40,7 @@
                   <th>Quantidade</th>
                 </tr>
                 <tr *ngFor="let item of itensPedidos">
-                  <td>{{ item.produto }}</td>
+                  <td>{{ item.item }}</td>
                   <td>{{ item.quantidade }}</td>
                 </tr>
                 <tr>
