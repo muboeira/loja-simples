@@ -3,7 +3,7 @@
     <tbody>
         <tr>
             <th>Cliente</th>
-            <th>Data</th>
+            <th class='center'>Data</th>
             <th class="text-center">
                 <a [routerLink]="['/pedidos/novo']" href="#" title="Novo" alt="Novo" class="btn btn-xs btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i> Novo
@@ -21,6 +21,9 @@
                     <i class="fa fa-times" aria-hidden="true"></i> Remover
                 </a>-->
             </td>
+        </tr>
+        <tr>
+           <th colspan="4">Total de Pedidos: {{totalPedidos}}</th>
         </tr>
     </tbody>
 </table>
