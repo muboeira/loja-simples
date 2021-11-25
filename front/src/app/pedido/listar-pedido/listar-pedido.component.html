@@ -16,7 +16,8 @@
             <td class='center'>{{ pedido.data }}</td>
             <td class='center'>
                 <span  *ngFor="let item of pedido.itensPedido">
-                    {{this.getInfoItemPedido(item)}}<br>
+                    <!-- {{this.getInfoItemPedido(item)}}<br> -->
+                    <a class="btn btn-xs btn-info"(click)="teste(item)">Ver item</a>
                 </span>
             </td>
             <td class="text-center" style="width: 300px">

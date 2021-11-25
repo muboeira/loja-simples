@@ -1,1 +1,42 @@
-<p>editar-pedido works!</p>
+<h1>Pedido {{ pedido.id }}</h1>
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{errorMessage}}
+</div>
+<div class="well">
+  <form #formPedido="ngForm">
+    <div class="row">
+        <div class='col-xs-12 col-md-6 right'>
+            Feito por: {{ this.getInfoCliente(pedido.cliente) }}
+        </div>
+        <div class='col-xs-12 col-md-6 left'>
+            Em: {{ pedido.data }}
+        </div>
+    </div>
+    <div class="row" *ngFor="let item of pedido.itensPedido">
+        <div class='col-xs-12 col-md-6 right'>
+            <!-- <div>{{item.produto.descricao}}</div> -->
+        </div>
+        <div class='col-xs-12 col-md-6 left'>
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class='col-xs-12 col-md-6 right'>
+        <a [routerLink]="['/pedidos']" class="btn btn-secondary">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+        </a>
+      </div>
+      <div class='col-xs-12 col-md-6 left'>
+        <button
+        type="button"
+        class="btn btn-primary"
+        (click)="atualizar()"
+        [disabled]="!formPedido.form.valid"
+      >
+        <i class="fa fa-save" aria-hidden="true"></i> Salvar
+      </button>
+      </div>
+  </div>
+  </form>
+</div>

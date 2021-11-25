@@ -9,7 +9,6 @@ import { ProdutoModule } from './produto/produto.module';
 import { PedidoModule } from './pedido/pedido.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -18,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProdutoModule,
     PedidoModule,
     ClienteModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

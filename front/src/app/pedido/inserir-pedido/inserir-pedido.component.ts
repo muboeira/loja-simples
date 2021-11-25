@@ -25,7 +25,9 @@ export class InserirPedidoComponent implements OnInit {
   itemSelecionado: ItemPedido = new ItemPedido();
   totalItens = 0;
   cpfPesquisado: any;
+  dataPreenchida: any;
   errorMessage!: String;
+  selectedDate: any;
   
   constructor(private produtoService: ProdutoService,
               private clienteService: ClienteService,
@@ -74,13 +76,10 @@ export class InserirPedidoComponent implements OnInit {
   }
 
   addProduto(): void{
-    // this.itensPedidos = [...this.itensPedidos, this.produtoSelecionado];
     this.itensPedidos.push(this.itemSelecionado);
     this.totalItens = this.itensPedidos.length;
     this.pedido.itensPedido = this.itensPedidos;
     this.itemSelecionado = new ItemPedido();
-    // console.log(this.itensPedidos);
-    console.log(this.pedido);
   }
 
   clienteSelecionado(cliente: Cliente){
@@ -89,7 +88,7 @@ export class InserirPedidoComponent implements OnInit {
   
   inserir(){
     if (this.formPedido.form.valid && this.pedido) {
-      //this.pedido.data = '24/11/2021'; para testes
+      this.pedido.data = this.dataPreenchida;
       this.pedidoService.inserir(this.pedido).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {
@@ -101,6 +100,14 @@ export class InserirPedidoComponent implements OnInit {
         }
       });
     }
+  }
+
+  getInfoCliente(cliente?: Cliente): String {
+    return new Pedido().getInfoCliente(cliente);
+  }
+  
+  getInfoItem(item?: ItemPedido): String {
+    return new Pedido().getInfoItem(item);
   }
 
 }

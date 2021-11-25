@@ -4,6 +4,7 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
 import { Cliente } from 'src/app/shared/models/cliente.model';
 import { HttpResponse } from '../../shared/models/http-response';
 import { ItemPedido } from 'src/app/shared/models/itemPedido';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -63,8 +64,12 @@ export class ListarPedidoComponent implements OnInit {
     return new Pedido().getInfoCliente(cliente);
   }
 
-  getInfoItemPedido(item?: ItemPedido): String {
+  getInfoItemPedido(item?: ItemPedido): string {
     return new Pedido().getInfoItemPedido(item);
   }
 
+  teste(item?: ItemPedido){
+    let teste = this.getInfoItemPedido(item);
+    Swal.fire(teste);
+  }
 }

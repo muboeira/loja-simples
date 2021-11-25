@@ -12,6 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
     InserirPedidoComponent,
     ListarPedidoComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, HttpClientModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    FormsModule, 
+    HttpClientModule
+  ],
 })
 export class PedidoModule {}

@@ -33,4 +33,16 @@ export class PedidoService {
       this.httpOptions
     );
   }
+
+  buscarPorId(id: number): Observable<Pedido> {
+    return this.httpClient.get<Pedido>(this.BASE_URL + id,this.httpOptions);
+  }
+
+  atualizar(pedido: Pedido): Observable<HttpResponse> {
+    return this.httpClient.put<HttpResponse>(
+      this.BASE_URL,
+      JSON.stringify(pedido),
+      this.httpOptions
+    );
+  }
 }

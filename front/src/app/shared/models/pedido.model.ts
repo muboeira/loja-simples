@@ -12,7 +12,12 @@ export class Pedido {
         return cliente?.cpf + ' - ' + cliente?.nome + ' ' + cliente?.sobrenome;
     }
 
-    public getInfoItemPedido(item?: ItemPedido): String {
+    public getInfoItemPedido(item?: ItemPedido): string {
         return 'Item: ' + item?.item?.descricao + ' / Quantidade: ' + item?.quantidade; 
     }
+    
+    public getInfoItem(item?: ItemPedido): String {
+        return 'Item: ' + item?.item?.descricao ; 
+    }
+
 }
