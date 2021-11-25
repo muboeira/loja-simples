@@ -15,10 +15,7 @@
             <td>{{ this.getInfoCliente(pedido.cliente) }}</td>
             <td class='center'>{{ pedido.data }}</td>
             <td class='center'>
-                <span  *ngFor="let item of pedido.itensPedido">
-                    <!-- {{this.getInfoItemPedido(item)}}<br> -->
-                    <a class="btn btn-xs btn-info"(click)="teste(item)">Ver item</a>
-                </span>
+                <a class="btn btn-xs btn-info"(click)="getInfoItensPedido(pedido.itensPedido)"><i class="fa fa-eye" aria-hidden="true"></i> Ver itens</a>
             </td>
             <td class="text-center" style="width: 300px">
                 <a [routerLink]="['/pedidos/editar/',pedido.id]" href="#" title="Editar" alt="Editar" class="btn btn-xs btn-info">

@@ -68,8 +68,8 @@ export class ListarPedidoComponent implements OnInit {
     return new Pedido().getInfoItemPedido(item);
   }
 
-  teste(item?: ItemPedido){
-    let teste = this.getInfoItemPedido(item);
-    Swal.fire(teste);
+  getInfoItensPedido(itens?: ItemPedido[]) {
+    let infos = new Pedido().getInfoItensPedido(itens);
+    Swal.fire(infos);
   }
 }
