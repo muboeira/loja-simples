@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pedido } from 'src/app/shared/models/pedido.model';
+import { HttpResponse } from '../../shared/models/http-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,8 @@ export class PedidoService {
     return this.httpClient.get<Pedido[]>(this.BASE_URL,this.httpOptions);
   }
 
-  inserir(pedido: Pedido): Observable<Pedido> {
-    console.log(JSON.stringify(pedido));
-    return this.httpClient.post<Pedido>(
+  inserir(pedido: Pedido): Observable<HttpResponse> {
+    return this.httpClient.post<HttpResponse>(
       this.BASE_URL,
       JSON.stringify(pedido),
       this.httpOptions

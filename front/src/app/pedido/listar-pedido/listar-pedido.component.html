@@ -10,7 +10,7 @@
             </th>
         </tr>
         <tr *ngFor="let pedido of pedidos">
-            <td>{{ pedido.data }}</td>
+            <td>{{ pedido.cliente }}</td>
             <td class="text-center" style="width: 300px">
                 <a [routerLink]="['/pedidos/editar/',pedido.id]" href="#" title="Editar" alt="Editar" class="btn btn-xs btn-info">
                     <i class="fa fa-edit" aria-hidden="true"></i> Editar
