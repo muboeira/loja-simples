@@ -6,15 +6,17 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
 import { HttpResponse } from '../../shared/models/http-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PedidoService {
-  constructor(private httpClient: HttpClient) { }
-  BASE_URL = "http://localhost:8080/pedido/";
-  httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+  constructor(private httpClient: HttpClient) {}
+  BASE_URL = 'http://localhost:8080/pedido/';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
   listarTodos(): Observable<Pedido[]> {
-    return this.httpClient.get<Pedido[]>(this.BASE_URL,this.httpOptions);
+    return this.httpClient.get<Pedido[]>(this.BASE_URL, this.httpOptions);
   }
 
   inserir(pedido: Pedido): Observable<HttpResponse> {

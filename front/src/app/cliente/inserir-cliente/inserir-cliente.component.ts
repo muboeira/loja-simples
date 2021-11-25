@@ -32,7 +32,7 @@ export class InserirClienteComponent implements OnInit {
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }

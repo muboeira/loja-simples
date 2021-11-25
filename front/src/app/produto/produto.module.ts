@@ -5,16 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { InserirProdutoComponent } from './inserir-produto/inserir-produto.component';
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { ListarProdutoComponent } from './listar-produto/listar-produto.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     InserirProdutoComponent,
     EditarProdutoComponent,
-    ListarProdutoComponent
+    ListarProdutoComponent,
   ],
-  imports: [
-    CommonModule, RouterModule, FormsModule
-  ]
+  imports: [CommonModule, RouterModule, FormsModule, HttpClientModule],
 })
-export class ProdutoModule { }
+export class ProdutoModule {}
