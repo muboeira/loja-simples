@@ -9,7 +9,10 @@ export class Pedido {
     ) {}
 
     public getInfoCliente(cliente?: Cliente): String {
-        console.log(cliente);
         return cliente?.cpf + ' - ' + cliente?.nome + ' ' + cliente?.sobrenome;
+    }
+
+    public getInfoItemPedido(item?: ItemPedido): String {
+        return 'Item: ' + item?.item?.descricao + ' / Quantidade: ' + item?.quantidade; 
     }
 }

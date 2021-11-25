@@ -89,6 +89,7 @@ export class InserirPedidoComponent implements OnInit {
   
   inserir(){
     if (this.formPedido.form.valid && this.pedido) {
+      this.pedido.data = '24/11/2021';
       this.pedidoService.inserir(this.pedido).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {

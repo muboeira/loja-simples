@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/shared/models/pedido.model';
 import { Cliente } from 'src/app/shared/models/cliente.model';
 import { HttpResponse } from '../../shared/models/http-response';
+import { ItemPedido } from 'src/app/shared/models/itemPedido';
 
 @Component({
   selector: 'app-listar-pedido',
@@ -60,6 +61,10 @@ export class ListarPedidoComponent implements OnInit {
 
   getInfoCliente(cliente?: Cliente): String {
     return new Pedido().getInfoCliente(cliente);
+  }
+
+  getInfoItemPedido(item?: ItemPedido): String {
+    return new Pedido().getInfoItemPedido(item);
   }
 
 }

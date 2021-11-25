@@ -4,6 +4,7 @@
         <tr>
             <th>Cliente</th>
             <th class='center'>Data</th>
+            <th class='center'>Detalhes</th>
             <th class="text-center">
                 <a [routerLink]="['/pedidos/novo']" href="#" title="Novo" alt="Novo" class="btn btn-xs btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i> Novo
@@ -12,7 +13,12 @@
         </tr>
         <tr *ngFor="let pedido of pedidos">
             <td>{{ this.getInfoCliente(pedido.cliente) }}</td>
-            <td>{{ pedido.data }}</td>
+            <td class='center'>{{ pedido.data }}</td>
+            <td class='center'>
+                <span  *ngFor="let item of pedido.itensPedido">
+                    {{this.getInfoItemPedido(item)}}<br>
+                </span>
+            </td>
             <td class="text-center" style="width: 300px">
                 <a [routerLink]="['/pedidos/editar/',pedido.id]" href="#" title="Editar" alt="Editar" class="btn btn-xs btn-info">
                     <i class="fa fa-edit" aria-hidden="true"></i> Editar
