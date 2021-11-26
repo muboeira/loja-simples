@@ -3,7 +3,8 @@
     <tbody>
         <tr>
             <th>Cliente 
-                <!-- <input type="text" placeholder="Informe CPF" [(ngModel)]="cpfPesquisado" (ngModelChange)="pesquisarCPF()" [ngModelOptions]="{standalone: true}"> -->
+                <input type="text" placeholder="Informe CPF" [(ngModel)]="cpfPesquisado" [ngModelOptions]="{standalone: true}">
+                <button class="btn btn-primary" (click)="pesquisarCPF()">Pesquisar</button>
             </th>
             <th class='center'>Data</th>
             <th class='center'>Detalhes</th>

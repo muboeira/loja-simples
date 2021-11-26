@@ -20,7 +20,7 @@ export class InserirPedidoComponent implements OnInit {
 
   produtos!: Produto[];
   clientes!: Cliente[];
-  clientesCopy!: Cliente[];
+  clientesOriginais!: Cliente[];
   itensPedidos: ItemPedido[] = [];
   pedido: Pedido = new Pedido();
   itemSelecionado: ItemPedido = new ItemPedido();
@@ -40,7 +40,6 @@ export class InserirPedidoComponent implements OnInit {
   ngOnInit(): void {
     this.produtos = this.listarTodosProdutos();
     this.clientes = this.listarTodosClientes();
-    console.log(this.pedido);
   }
 
   listarTodosProdutos(): Produto[] {
@@ -64,6 +63,7 @@ export class InserirPedidoComponent implements OnInit {
           this.clientes = [];
         } else {
           this.clientes = data;
+          this.clientesOriginais = data;
         }
       },
     });
@@ -71,11 +71,15 @@ export class InserirPedidoComponent implements OnInit {
     return this.clientes;
   }
 
-  pesquisarCPF() {
+  pesquisarCPF(){
     let cpf = this.cpfPesquisado;
-    this.clientes = [...this.clientes].filter(function (tag) {
-      return tag.cpf.indexOf(cpf) >= 0;
-    });
+    if (cpf == '' || cpf == null) {
+      this.clientes = this.clientesOriginais;
+    } else {
+      this.clientes = this.clientesOriginais.filter( cliente => {
+        return cliente.cpf == cpf; 
+      })
+    }
   }
 
   addProduto(): void {
@@ -90,8 +94,6 @@ export class InserirPedidoComponent implements OnInit {
     if (index > -1) {
       this.itensPedidos.splice(index, 1);
     }
-    console.log(index);
-    console.log(this.itensPedidos);
   }
 
   clienteSelecionado(cliente: Cliente) {
@@ -100,7 +102,6 @@ export class InserirPedidoComponent implements OnInit {
 
   inserir() {
     if (this.formPedido.form.valid && this.pedido) {
-      console.log(this.pedido);
       this.pedido.data = this.dataPreenchida;
       this.pedidoService.inserirPedido(this.pedido).subscribe({
         next: (data: HttpResponse) => {
