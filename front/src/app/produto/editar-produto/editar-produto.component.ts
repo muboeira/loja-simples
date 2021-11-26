@@ -8,10 +8,9 @@ import { HttpResponse } from '../../shared/models/http-response';
 @Component({
   selector: 'app-editar-produto',
   templateUrl: './editar-produto.component.html',
-  styleUrls: ['./editar-produto.component.scss']
+  styleUrls: ['./editar-produto.component.scss'],
 })
 export class EditarProdutoComponent implements OnInit {
-
   @ViewChild('formProduto') formProduto!: NgForm;
 
   produto!: Produto;
@@ -30,30 +29,29 @@ export class EditarProdutoComponent implements OnInit {
   buscarProduto(): void {
     const id = +this.routerParams.snapshot.params['produtoId'];
 
-    this.produtoService.buscarPorId(id).subscribe({
+    this.produtoService.buscarProdutoPorId(id).subscribe({
       next: (data: Produto | undefined) => {
-        if(data == undefined) {
+        if (data == undefined) {
           this.router.navigate(['/produtos']);
-        }else {
+        } else {
           this.produto = data;
         }
-      }
+      },
     });
   }
 
   atualizar(): void {
     if (this.formProduto.form.valid && this.produto) {
-      this.produtoService.atualizar(this.produto).subscribe({
+      this.produtoService.atualizarProduto(this.produto).subscribe({
         next: (data: HttpResponse) => {
-          if(data.status == 'OK') {
+          if (data.status == 'OK') {
             this.router.navigate(['/produtos']);
           }
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }
-
 }

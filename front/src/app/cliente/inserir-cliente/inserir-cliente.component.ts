@@ -24,7 +24,7 @@ export class InserirClienteComponent implements OnInit {
 
   inserir(): void {
     if (this.formCliente.form.valid && this.cliente) {
-      this.clienteService.inserir(this.cliente).subscribe({
+      this.clienteService.inserirCliente(this.cliente).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {
             this.router.navigate(['/clientes']);

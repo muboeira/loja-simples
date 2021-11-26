@@ -5,11 +5,10 @@ import { Produto } from '../../shared/models/produto.model';
 import { ProdutoService } from '../services/produto.service';
 import { HttpResponse } from '../../shared/models/http-response';
 
-
 @Component({
   selector: 'app-inserir-produto',
   templateUrl: './inserir-produto.component.html',
-  styleUrls: ['./inserir-produto.component.scss']
+  styleUrls: ['./inserir-produto.component.scss'],
 })
 export class InserirProdutoComponent implements OnInit {
   @ViewChild('formProduto') formProduto!: NgForm;
@@ -17,10 +16,7 @@ export class InserirProdutoComponent implements OnInit {
   produto!: Produto;
   errorMessage!: String;
 
-  constructor(
-    private produtoService: ProdutoService,
-    private router: Router
-  ) {}
+  constructor(private produtoService: ProdutoService, private router: Router) {}
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -28,17 +24,16 @@ export class InserirProdutoComponent implements OnInit {
 
   inserir(): void {
     if (this.formProduto.form.valid && this.produto) {
-      this.produtoService.inserir(this.produto).subscribe({
+      this.produtoService.inserirProduto(this.produto).subscribe({
         next: (data: HttpResponse) => {
-          if(data.status == 'CREATED') {
+          if (data.status == 'CREATED') {
             this.router.navigate(['/produtos']);
           }
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }
-
 }

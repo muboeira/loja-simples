@@ -1,44 +1,38 @@
 import { Injectable } from '@angular/core';
 
 import { Produto } from '../../shared/models/produto.model';
-import { HttpClient, HttpHeaders} from'@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '../../shared/models/http-response';
 import { Observable } from 'rxjs';
+import { BaseService } from 'src/app/shared/services/base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProdutoService {
-  constructor(private httpClient: HttpClient) {}
+export class ProdutoService extends BaseService {
+  constructor(private httpClient: HttpClient) {
+    super(httpClient);
+  }
 
-  BASE_URL = "http://localhost:8080/produto/";
-  httpOptions= {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+  endpoint = 'produto/';
 
   listarTodos(): Observable<Produto[]> {
-    return this.httpClient.get<Produto[]>(this.BASE_URL,this.httpOptions);
+    return this.listar(this.endpoint);
   }
 
-  inserir(produto: Produto): Observable<HttpResponse> {
-    return this.httpClient.post<HttpResponse>(
-      this.BASE_URL,
-      JSON.stringify(produto),
-      this.httpOptions
-    );
+  inserirProduto(produto: Produto): Observable<HttpResponse> {
+    return this.inserir(this.endpoint, produto);
   }
 
-  remover(id: number): Observable<HttpResponse> {
-    return this.httpClient.delete<HttpResponse>(this.BASE_URL + id, this.httpOptions);
+  removerProduto(id: number): Observable<HttpResponse> {
+    return this.remover(`${this.endpoint}${id}`);
   }
 
-  buscarPorId(id: number): Observable<Produto> {
-    return this.httpClient.get<Produto>(this.BASE_URL + id,this.httpOptions);
+  buscarProdutoPorId(id: number): Observable<Produto> {
+    return this.buscarPorId(`${this.endpoint}${id}`);
   }
-  
-  atualizar(produto: Produto): Observable<HttpResponse> {
-    return this.httpClient.put<HttpResponse>(
-      this.BASE_URL,
-      JSON.stringify(produto),
-      this.httpOptions
-    );
+
+  atualizarProduto(produto: Produto): Observable<HttpResponse> {
+    return this.atualizar(`${this.endpoint}`, produto);
   }
 }

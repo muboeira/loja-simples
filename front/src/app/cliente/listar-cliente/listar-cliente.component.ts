@@ -4,7 +4,6 @@ import { Cliente } from 'src/app/shared/models/cliente.model';
 import { Router } from '@angular/router';
 import { HttpResponse } from '../../shared/models/http-response';
 
-
 @Component({
   selector: 'app-listar-cliente',
   templateUrl: './listar-cliente.component.html',
@@ -14,10 +13,7 @@ export class ListarClienteComponent implements OnInit {
   clientes!: Cliente[];
   totalClientes!: Number;
 
-  constructor(
-    private clienteService: ClienteService,
-    private router: Router
-  ) {}
+  constructor(private clienteService: ClienteService, private router: Router) {}
 
   ngOnInit(): void {
     this.clientes = this.listarTodos();
@@ -30,12 +26,12 @@ export class ListarClienteComponent implements OnInit {
           this.clientes = [];
         } else {
           this.clientes = data;
-          this.totalClientes = data.length; 
+          this.totalClientes = data.length;
         }
       },
       error: (erro: any) => {
         alert(erro.error.message);
-      }
+      },
     });
 
     return this.clientes;
@@ -44,21 +40,19 @@ export class ListarClienteComponent implements OnInit {
   remover($event: any, cliente: Cliente): void {
     $event.preventDefault();
     if (
-      confirm(
-        'Deseja realmente remover o cliente "' + cliente.nome + '"?'
-      ) &&
+      confirm('Deseja realmente remover o cliente "' + cliente.nome + '"?') &&
       cliente.id
     ) {
-      this.clienteService.remover(cliente.id).subscribe({
+      this.clienteService.removerCliente(cliente.id).subscribe({
         next: (data: HttpResponse) => {
-          if(data.status == 'OK') {
+          if (data.status == 'OK') {
             this.listarTodos();
           }
         },
         error: (erro: any) => {
-          alert(erro.error.message)
-        }
-      });   
+          alert(erro.error.message);
+        },
+      });
     }
   }
 }

@@ -43,13 +43,13 @@ describe('ProdutoService', () => {
 
   it('deve deletar o produto pelo id', (done) => {
     httpSpy.delete.and.returnValue(of(null));
-    service.remover(1).subscribe(() => done(), done.fail);
+    service.removerProduto(1).subscribe(() => done(), done.fail);
     expect(httpSpy.delete.calls.count()).toBe(1);
   });
 
   it('deve buscar produto por id', (done) => {
     httpSpy.get.and.returnValue(of(produto));
-    service.buscarPorId(1).subscribe((result) => {
+    service.buscarProdutoPorId(1).subscribe((result) => {
       expect(result).toEqual(produto);
       done();
     }, done.fail);
@@ -59,7 +59,7 @@ describe('ProdutoService', () => {
   it('deve salvar produto', (done) => {
     httpSpy.post.and.returnValue(of(httpResponse));
 
-    service.inserir(produto).subscribe((result) => {
+    service.inserirProduto(produto).subscribe((result) => {
       expect(result).toEqual(httpResponse);
       done();
     }, done.fail);
@@ -69,7 +69,7 @@ describe('ProdutoService', () => {
   it('deve atualizar produto', (done) => {
     httpSpy.put.and.returnValue(of(httpResponse));
 
-    service.atualizar(produto).subscribe((result) => {
+    service.atualizarProduto(produto).subscribe((result) => {
       expect(result).toEqual(httpResponse);
       done();
     }, done.fail);

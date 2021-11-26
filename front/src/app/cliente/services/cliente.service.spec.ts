@@ -43,13 +43,13 @@ describe('ClienteService', () => {
 
   it('deve deletar o cliente pelo id', (done) => {
     httpSpy.delete.and.returnValue(of(null));
-    service.remover(1).subscribe(() => done(), done.fail);
+    service.removerCliente(1).subscribe(() => done(), done.fail);
     expect(httpSpy.delete.calls.count()).toBe(1);
   });
 
   it('deve buscar cliente por id', (done) => {
     httpSpy.get.and.returnValue(of(cliente));
-    service.buscarPorId(1).subscribe((result) => {
+    service.buscarClientePorId(1).subscribe((result) => {
       expect(result).toEqual(cliente);
       done();
     }, done.fail);
@@ -59,7 +59,7 @@ describe('ClienteService', () => {
   it('deve salvar cliente', (done) => {
     httpSpy.post.and.returnValue(of(httpResponse));
 
-    service.inserir(cliente).subscribe((result) => {
+    service.inserirCliente(cliente).subscribe((result) => {
       expect(result).toEqual(httpResponse);
       done();
     }, done.fail);
@@ -69,7 +69,7 @@ describe('ClienteService', () => {
   it('deve atualizar cliente', (done) => {
     httpSpy.put.and.returnValue(of(httpResponse));
 
-    service.atualizar(cliente).subscribe((result) => {
+    service.atualizarCliente(cliente).subscribe((result) => {
       expect(result).toEqual(httpResponse);
       done();
     }, done.fail);

@@ -13,7 +13,7 @@ import { ClienteService } from 'src/app/cliente/services/cliente.service';
 @Component({
   selector: 'app-editar-pedido',
   templateUrl: './editar-pedido.component.html',
-  styleUrls: ['./editar-pedido.component.scss']
+  styleUrls: ['./editar-pedido.component.scss'],
 })
 export class EditarPedidoComponent implements OnInit {
   @ViewChild('formPedido') formPedido!: NgForm;
@@ -35,7 +35,7 @@ export class EditarPedidoComponent implements OnInit {
     private pedidoService: PedidoService,
     private routerParams: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.buscarPedido();
@@ -46,7 +46,7 @@ export class EditarPedidoComponent implements OnInit {
   buscarPedido(): void {
     const id = +this.routerParams.snapshot.params['pedidoId'];
 
-    this.pedidoService.buscarPorId(id).subscribe({
+    this.pedidoService.buscarPedidoPorId(id).subscribe({
       next: (data: Pedido | undefined) => {
         if (data == undefined) {
           this.router.navigate(['/pedidos']);
@@ -69,7 +69,7 @@ export class EditarPedidoComponent implements OnInit {
         } else {
           this.produtos = data;
         }
-      }
+      },
     });
 
     return this.produtos;
@@ -83,20 +83,20 @@ export class EditarPedidoComponent implements OnInit {
         } else {
           this.clientes = data;
         }
-      }
+      },
     });
 
     return this.clientes;
   }
 
-  pesquisarCPF(){
+  pesquisarCPF() {
     let cpf = this.cpfPesquisado;
-    this.clientes = [...this.clientes].filter(function(tag) {
-        return tag.cpf.indexOf(cpf) >= 0;
-    }); 
+    this.clientes = [...this.clientes].filter(function (tag) {
+      return tag.cpf.indexOf(cpf) >= 0;
+    });
   }
 
-  addProduto(): void{
+  addProduto(): void {
     this.itensPedidos.push(this.itemSelecionado);
     this.totalItens = this.itensPedidos.length;
     this.pedido.itensPedido = this.itensPedidos;
@@ -110,15 +110,14 @@ export class EditarPedidoComponent implements OnInit {
     }
   }
 
-  clienteSelecionado(cliente: Cliente){
+  clienteSelecionado(cliente: Cliente) {
     this.pedido.cliente = cliente;
   }
 
   atualizar(): void {
     if (this.formPedido.form.valid && this.pedido) {
-      console.log(this.pedido);
       this.pedido.data = this.dataPreenchida;
-      this.pedidoService.atualizar(this.pedido).subscribe({
+      this.pedidoService.atualizarPedido(this.pedido).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'OK') {
             this.router.navigate(['/pedidos']);
@@ -126,7 +125,7 @@ export class EditarPedidoComponent implements OnInit {
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }
@@ -134,9 +133,8 @@ export class EditarPedidoComponent implements OnInit {
   getInfoCliente(cliente?: Cliente): String {
     return new Pedido().getInfoCliente(cliente);
   }
-  
+
   getInfoItem(item?: ItemPedido): String {
     return new Pedido().getInfoItem(item);
   }
-
 }

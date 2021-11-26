@@ -49,14 +49,14 @@ describe('PedidoService', () => {
 
   it('deve deletar o pedido pelo id', (done) => {
     httpSpy.delete.and.returnValue(of(null));
-    service.remover(1).subscribe(() => done(), done.fail);
+    service.removerPedido(1).subscribe(() => done(), done.fail);
     expect(httpSpy.delete.calls.count()).toBe(1);
   });
 
   it('deve salvar pedido', (done) => {
     httpSpy.post.and.returnValue(of(httpResponse));
 
-    service.inserir(pedido).subscribe((result) => {
+    service.inserirPedido(pedido).subscribe((result) => {
       expect(result).toEqual(httpResponse);
       done();
     }, done.fail);

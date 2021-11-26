@@ -13,7 +13,7 @@ import { HttpResponse } from '../../shared/models/http-response';
 @Component({
   selector: 'app-inserir-pedido',
   templateUrl: './inserir-pedido.component.html',
-  styleUrls: ['./inserir-pedido.component.scss']
+  styleUrls: ['./inserir-pedido.component.scss'],
 })
 export class InserirPedidoComponent implements OnInit {
   @ViewChild('formPedido') formPedido!: NgForm;
@@ -28,11 +28,13 @@ export class InserirPedidoComponent implements OnInit {
   dataPreenchida: any;
   errorMessage!: String;
   selectedDate: any;
-  
-  constructor(private produtoService: ProdutoService,
-              private clienteService: ClienteService,
-              private pedidoService: PedidoService,
-              private router: Router) { }
+
+  constructor(
+    private produtoService: ProdutoService,
+    private clienteService: ClienteService,
+    private pedidoService: PedidoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.produtos = this.listarTodosProdutos();
@@ -48,7 +50,7 @@ export class InserirPedidoComponent implements OnInit {
         } else {
           this.produtos = data;
         }
-      }
+      },
     });
 
     return this.produtos;
@@ -62,20 +64,20 @@ export class InserirPedidoComponent implements OnInit {
         } else {
           this.clientes = data;
         }
-      }
+      },
     });
 
     return this.clientes;
   }
 
-  pesquisarCPF(){
+  pesquisarCPF() {
     let cpf = this.cpfPesquisado;
-    this.clientes = [...this.clientes].filter(function(tag) {
-        return tag.cpf.indexOf(cpf) >= 0;
-    }); 
+    this.clientes = [...this.clientes].filter(function (tag) {
+      return tag.cpf.indexOf(cpf) >= 0;
+    });
   }
 
-  addProduto(): void{
+  addProduto(): void {
     this.itensPedidos.push(this.itemSelecionado);
     this.totalItens = this.itensPedidos.length;
     this.pedido.itensPedido = this.itensPedidos;
@@ -91,15 +93,15 @@ export class InserirPedidoComponent implements OnInit {
     console.log(this.itensPedidos);
   }
 
-  clienteSelecionado(cliente: Cliente){
+  clienteSelecionado(cliente: Cliente) {
     this.pedido.cliente = cliente;
   }
-  
-  inserir(){
+
+  inserir() {
     if (this.formPedido.form.valid && this.pedido) {
       console.log(this.pedido);
       this.pedido.data = this.dataPreenchida;
-      this.pedidoService.inserir(this.pedido).subscribe({
+      this.pedidoService.inserirPedido(this.pedido).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'CREATED') {
             this.router.navigate(['/pedidos']);
@@ -107,7 +109,7 @@ export class InserirPedidoComponent implements OnInit {
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }
@@ -115,9 +117,8 @@ export class InserirPedidoComponent implements OnInit {
   getInfoCliente(cliente?: Cliente): String {
     return new Pedido().getInfoCliente(cliente);
   }
-  
+
   getInfoItem(item?: ItemPedido): String {
     return new Pedido().getInfoItem(item);
   }
-
 }

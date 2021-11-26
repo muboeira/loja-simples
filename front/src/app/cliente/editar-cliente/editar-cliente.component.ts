@@ -29,7 +29,7 @@ export class EditarClienteComponent implements OnInit {
   buscarCliente(): void {
     const id = +this.routerParams.snapshot.params['clienteId'];
 
-    this.clienteService.buscarPorId(id).subscribe({
+    this.clienteService.buscarClientePorId(id).subscribe({
       next: (data: Cliente | undefined) => {
         if (data == undefined) {
           this.router.navigate(['/clientes']);
@@ -42,7 +42,7 @@ export class EditarClienteComponent implements OnInit {
 
   atualizar(): void {
     if (this.formCliente.form.valid && this.cliente) {
-      this.clienteService.atualizar(this.cliente).subscribe({
+      this.clienteService.atualizarCliente(this.cliente).subscribe({
         next: (data: HttpResponse) => {
           if (data.status == 'OK') {
             this.router.navigate(['/clientes']);
@@ -50,7 +50,7 @@ export class EditarClienteComponent implements OnInit {
         },
         error: (erro: any) => {
           this.errorMessage = erro.error.message;
-        }
+        },
       });
     }
   }

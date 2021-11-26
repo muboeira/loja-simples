@@ -14,10 +14,7 @@ export class ListarProdutoComponent implements OnInit {
   produtos!: Produto[];
   totalProdutos!: Number;
 
-  constructor(
-    private produtoService: ProdutoService,
-    private router: Router
-  ) {}
+  constructor(private produtoService: ProdutoService, private router: Router) {}
 
   ngOnInit(): void {
     this.produtos = this.listarTodos();
@@ -30,12 +27,12 @@ export class ListarProdutoComponent implements OnInit {
           this.produtos = [];
         } else {
           this.produtos = data;
-          this.totalProdutos = data.length; 
+          this.totalProdutos = data.length;
         }
       },
       error: (erro: any) => {
-        alert(erro.error.message)
-      }
+        alert(erro.error.message);
+      },
     });
 
     return this.produtos;
@@ -49,16 +46,16 @@ export class ListarProdutoComponent implements OnInit {
       ) &&
       produto.id
     ) {
-      this.produtoService.remover(produto.id).subscribe({
+      this.produtoService.removerProduto(produto.id).subscribe({
         next: (data: HttpResponse) => {
-          if(data.status == 'OK') {
+          if (data.status == 'OK') {
             this.listarTodos();
           }
         },
         error: (erro: any) => {
           alert(erro.error.message);
-        }
-      });   
+        },
+      });
     }
   }
 }
