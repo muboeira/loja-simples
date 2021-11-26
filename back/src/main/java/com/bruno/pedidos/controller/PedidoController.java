@@ -66,7 +66,7 @@ public class PedidoController {
                 throw new Exception("Informe um cliente para o pedido!");
             }
             List<ItemPedido> itensPedidoCreated = pedido.getItensPedido();
-            if(itensPedidoCreated == null) {
+            if(itensPedidoCreated == null || itensPedidoCreated.size() <= 0) {
                 throw new Exception("Informe ao menos um item para o pedido!");
             }
             for (ItemPedido itemPedido : itensPedidoCreated) {
@@ -107,7 +107,7 @@ public class PedidoController {
                 throw new Exception("Informe um cliente para o pedido!");
             }
             List<ItemPedido> itensPedidoCreated = pedido.getItensPedido();
-            if(itensPedidoCreated == null) {
+            if(itensPedidoCreated == null || itensPedidoCreated.size() <= 0) {
                 throw new Exception("Informe ao menos um item para o pedido!");
             }
             for (ItemPedido itemPedido : itensPedidoCreated) {
@@ -121,6 +121,7 @@ public class PedidoController {
             }
 
             Pedido pedidoCreated = pedidoRepository.save(pedido);
+            pedidoRepository.removerProdutosPedido(pedido.getId());
             List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
             for (ItemPedido itemPedido : itensPedidoCreated) {
                 itemPedido.setPedido(pedidoCreated);

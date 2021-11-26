@@ -82,12 +82,22 @@ export class InserirPedidoComponent implements OnInit {
     this.itemSelecionado = new ItemPedido();
   }
 
+  removerProduto(produto: ItemPedido) {
+    var index = this.itensPedidos.indexOf(produto);
+    if (index > -1) {
+      this.itensPedidos.splice(index, 1);
+    }
+    console.log(index);
+    console.log(this.itensPedidos);
+  }
+
   clienteSelecionado(cliente: Cliente){
     this.pedido.cliente = cliente;
   }
   
   inserir(){
     if (this.formPedido.form.valid && this.pedido) {
+      console.log(this.pedido);
       this.pedido.data = this.dataPreenchida;
       this.pedidoService.inserir(this.pedido).subscribe({
         next: (data: HttpResponse) => {

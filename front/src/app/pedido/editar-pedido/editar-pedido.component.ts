@@ -103,12 +103,20 @@ export class EditarPedidoComponent implements OnInit {
     this.itemSelecionado = new ItemPedido();
   }
 
+  removerProduto(produto: ItemPedido) {
+    var index = this.itensPedidos.indexOf(produto);
+    if (index > -1) {
+      this.itensPedidos.splice(index, 1);
+    }
+  }
+
   clienteSelecionado(cliente: Cliente){
     this.pedido.cliente = cliente;
   }
 
   atualizar(): void {
     if (this.formPedido.form.valid && this.pedido) {
+      console.log(this.pedido);
       this.pedido.data = this.dataPreenchida;
       this.pedidoService.atualizar(this.pedido).subscribe({
         next: (data: HttpResponse) => {

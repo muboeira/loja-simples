@@ -51,10 +51,15 @@
               <tr>
                 <th>Descricao</th>
                 <th>Quantidade</th>
+                <th></th>
               </tr>
               <tr *ngFor="let item of itensPedidos">
                 <td>{{ this.getInfoItem(item) }}</td>
                 <td>{{ item.quantidade }}</td>
+                <td class='center'><a (click)="removerProduto(item)" title="Remover" alt="Remover" class="btn btn-xs btn-danger">
+                  <i class="fa fa-times" aria-hidden="true"></i> Remover
+                </a>
+              </td>
               </tr>
               <tr>
                 <th colspan="4">Total de itens: {{totalItens}}</th>
