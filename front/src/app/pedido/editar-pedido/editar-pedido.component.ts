@@ -20,6 +20,7 @@ export class EditarPedidoComponent implements OnInit {
 
   produtos!: Produto[];
   clientes!: Cliente[];
+  clientesOriginais!: Cliente[];
   itensPedidos: ItemPedido[] = [];
   pedido: Pedido = new Pedido();
   itemSelecionado: ItemPedido = new ItemPedido();
@@ -55,7 +56,6 @@ export class EditarPedidoComponent implements OnInit {
           this.dataPreenchida = this.pedido.data;
           this.itensPedidos = this.pedido.itensPedido!;
           this.totalItens = this.pedido.itensPedido!.length;
-          console.log(this.pedido);
         }
       },
     });
@@ -82,6 +82,7 @@ export class EditarPedidoComponent implements OnInit {
           this.clientes = [];
         } else {
           this.clientes = data;
+          this.clientesOriginais = data;
         }
       },
     });
@@ -89,11 +90,15 @@ export class EditarPedidoComponent implements OnInit {
     return this.clientes;
   }
 
-  pesquisarCPF() {
+  pesquisarCPF(){
     let cpf = this.cpfPesquisado;
-    this.clientes = [...this.clientes].filter(function (tag) {
-      return tag.cpf.indexOf(cpf) >= 0;
-    });
+    if (cpf == '' || cpf == null) {
+      this.clientes = this.clientesOriginais;
+    } else {
+      this.clientes = this.clientesOriginais.filter( cliente => {
+        return cliente.cpf == cpf; 
+      })
+    }
   }
 
   addProduto(): void {

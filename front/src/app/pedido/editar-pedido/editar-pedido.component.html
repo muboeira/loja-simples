@@ -16,7 +16,8 @@
       <div class="form-group" style="padding-top: 20px;">
         <div class='col-md-2'>
           <label>Informe o CPF:</label>
-          <input [(ngModel)]="cpfPesquisado" (ngModelChange)="pesquisarCPF()" [ngModelOptions]="{standalone: true}" class="form-control">
+          <input [(ngModel)]="cpfPesquisado" [ngModelOptions]="{standalone: true}" class="form-control">
+          <button class="btn btn-primary" (click)="pesquisarCPF()">Pesquisar</button>
           <div>
             <span *ngFor="let cliente of clientes" (click)="clienteSelecionado(cliente)"
               class="cliente center">{{cliente.nome}}</span>
