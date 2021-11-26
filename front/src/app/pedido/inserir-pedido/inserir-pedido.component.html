@@ -6,13 +6,13 @@
   <form #formPedido="ngForm">
     <div class="row">
       <div class="form-group">
-        <div class='col-md-2'>
+        <div class='col-md-2 center'>
           <label>Informe o CPF:</label>
           <input [(ngModel)]="cpfPesquisado" [ngModelOptions]="{standalone: true}" class="form-control">
-          <button class="btn btn-primary" (click)="pesquisarCPF()">Pesquisar</button>
+          <button class="btn btn-primary" (click)="pesquisarCPF()" style="margin: 5px 0 5px 0;">Pesquisar</button>
           <div>
             <span *ngFor="let cliente of clientes" (click)="clienteSelecionado(cliente)"
-              class="cliente">{{cliente.nome}}</span>
+              class="cliente center">{{cliente.cpf}} - {{cliente.nome}} {{cliente.sobrenome}}</span>
           </div><br>
           <div>
             <label for="data">Informe a Data:</label>
