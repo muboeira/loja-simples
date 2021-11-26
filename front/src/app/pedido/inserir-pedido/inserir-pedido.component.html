@@ -15,7 +15,7 @@
           </div><br>
           <div>
             <label for="data">Informe a Data:</label>
-            <input type="data" [(ngModel)]="dataPreenchida" #data="ngModel" [ngModelOptions]="{standalone: true}" class="form-control">
+            <input type="data" [(ngModel)]="dataPreenchida" #data="ngModel" [ngModelOptions]="{standalone: true}" class="form-control" mask="d0/M0/0000">
           </div>
         </div>
 
@@ -49,7 +49,7 @@
                   </th>
               </tr>
               <tr>
-                <th>Descricao</th>
+                <th>Descrição</th>
                 <th>Quantidade</th>
                 <th></th>
               </tr>
