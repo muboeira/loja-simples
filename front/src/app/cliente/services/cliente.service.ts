@@ -33,6 +33,6 @@ export class ClienteService extends BaseService {
   }
 
   atualizarCliente(cliente: Cliente): Observable<HttpResponse> {
-    return this.atualizar(`${this.endpoint}${cliente.id}`, cliente);
+    return this.atualizar(`${this.endpoint}`, cliente);
   }
 }
