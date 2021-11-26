@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class ListarPedidoComponent implements OnInit {
   pedidos!: Pedido[];
   totalPedidos!: Number;
+  cpfPesquisado: any;
+  pedidosOriginais!: Pedido[];
 
   constructor(private pedidoService: PedidoService) {}
 
@@ -28,6 +30,7 @@ export class ListarPedidoComponent implements OnInit {
           this.pedidos = [];
         } else {
           this.pedidos = data;
+          this.pedidosOriginais = data;
           this.totalPedidos = data.length;
         }
       },
@@ -69,5 +72,17 @@ export class ListarPedidoComponent implements OnInit {
   getInfoItensPedido(itens?: ItemPedido[]) {
     let infos = new Pedido().getInfoItensPedido(itens);
     Swal.fire(infos);
+  }
+
+  pesquisarCPF(){
+    let cpf = this.cpfPesquisado;
+    if (cpf == '' || cpf == null) {
+      this.pedidos = this.pedidosOriginais;
+    } else {
+      this.pedidos = this.pedidosOriginais.filter( pedido => {
+        return pedido.cliente?.cpf == cpf; 
+      })
+    }
+    this.totalPedidos = this.pedidos.length;
   }
 }

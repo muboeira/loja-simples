@@ -20,6 +20,7 @@ export class InserirPedidoComponent implements OnInit {
 
   produtos!: Produto[];
   clientes!: Cliente[];
+  clientesCopy!: Cliente[];
   itensPedidos: ItemPedido[] = [];
   pedido: Pedido = new Pedido();
   itemSelecionado: ItemPedido = new ItemPedido();
