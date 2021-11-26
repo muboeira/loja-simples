@@ -97,6 +97,9 @@ public class ProdutoController {
         HttpResponse response = new HttpResponse();
 
         try {
+            if(produtoRepository.verificaPedidoProduto(id) > 0) {
+                throw new Exception("Erro ao deletar o Produto. Motivo: Ele possui pedidos cadastrados no sistema.");
+            }
             produtoRepository.deleteById(id);
             response.setStatus(HttpStatus.OK);
             response.setMessage("Produto deletado com sucesso.");

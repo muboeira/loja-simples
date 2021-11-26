@@ -1,42 +1,80 @@
-<h1>Pedido {{ pedido.id }}</h1>
+<h1>Editar Pedido</h1>
 <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
   {{errorMessage}}
 </div>
 <div class="well">
   <form #formPedido="ngForm">
-    <div class="row">
+    <div>
+      <div class="form-group" style="padding-bottom: 20px;border-bottom: 3px solid black;">
+        <div class='col-md-2'>
+          <label for="cliente">Cliente:</label><br>
+          <span>{{ this.getInfoCliente(pedido.cliente) }}</span><br><br>
+          <label for="data">Informe a Data:</label>
+          <input type="data" [(ngModel)]="dataPreenchida" #data="ngModel" [ngModelOptions]="{standalone: true}" class="form-control">
+        </div>
+      </div>
+      <div class="form-group" style="padding-top: 20px;">
+        <div class='col-md-2'>
+          <label>Informe o CPF:</label>
+          <input [(ngModel)]="cpfPesquisado" (ngModelChange)="pesquisarCPF()" [ngModelOptions]="{standalone: true}" class="form-control">
+          <div>
+            <span *ngFor="let cliente of clientes" (click)="clienteSelecionado(cliente)"
+              class="cliente center">{{cliente.nome}}</span>
+          </div>
+        </div>
+        <div *ngIf="pedido.cliente">
+          <div class="row" style='padding-top: 20px;'>
+            <div class="form-group col-md-3">
+              <label for="descricao">Informe os Produtos</label>
+              <select class="form-control" name="produto" [(ngModel)]="itemSelecionado.item">
+                <option selected="selected" disabled>Selecione um produto ...</option>
+                <option *ngFor="let produto of produtos" [ngValue]="produto">{{ produto.descricao }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-1">
+              <label for="quantidade" style="width: 100%;">Quantidade</label>
+              <input type="quantidade" class="form-control" [(ngModel)]="itemSelecionado.quantidade" name="quantidade" #quantidade="ngModel">
+              <div *ngIf="quantidade.errors && (quantidade.dirty || quantidade.touched)" class="alert alert-danger">
+                <div [hidden]="!quantidade.errors.required">Digite uma quantidade</div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" style='margin-top:10px' (click)="addProduto()">
+            <i class="fa fa-plus"></i> Adicionar Produto
+          </button>
+        </div>
+        <div *ngIf="itensPedidos.length > 0">
+          <div style="padding-top:30px">
+            <table class="table table-striped table-bordered table-hover">
+              <tbody>
+                <tr>
+                  <th>Descricao</th>
+                  <th>Quantidade</th>
+                </tr>
+                <tr *ngFor="let item of itensPedidos">
+                  <td>{{ this.getInfoItem(item) }}</td>
+                  <td>{{ item.quantidade }}</td>
+                </tr>
+                <tr>
+                  <th colspan="4">Total de itens: {{totalItens}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><br>
+      <div class="row">
         <div class='col-xs-12 col-md-6 right'>
-            Feito por: {{ this.getInfoCliente(pedido.cliente) }}
+          <a [routerLink]="['/pedidos']" class="btn btn-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+          </a>
         </div>
         <div class='col-xs-12 col-md-6 left'>
-            Em: {{ pedido.data }}
+          <button type="button" class="btn btn-primary" (click)="atualizar()" [disabled]="!formPedido.form.valid">
+            <i class="fa fa-save" aria-hidden="true"></i> Salvar
+          </button>
         </div>
-    </div>
-    <div class="row" *ngFor="let item of pedido.itensPedido">
-        <div class='col-xs-12 col-md-6 right'>
-            <!-- <div>{{item.produto.descricao}}</div> -->
-        </div>
-        <div class='col-xs-12 col-md-6 left'>
-
-        </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class='col-xs-12 col-md-6 right'>
-        <a [routerLink]="['/pedidos']" class="btn btn-secondary">
-          <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
-        </a>
       </div>
-      <div class='col-xs-12 col-md-6 left'>
-        <button
-        type="button"
-        class="btn btn-primary"
-        (click)="atualizar()"
-        [disabled]="!formPedido.form.valid"
-      >
-        <i class="fa fa-save" aria-hidden="true"></i> Salvar
-      </button>
-      </div>
-  </div>
+    </div>
   </form>
 </div>

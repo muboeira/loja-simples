@@ -13,4 +13,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query(value = "SELECT count(*) FROM produto WHERE trim(lower(descricao)) = trim(lower(:descricao)) and id <> :id", nativeQuery = true)
     Integer verificaProdutoExistente(@Param("id") Long id, @Param("descricao") String descricao);
 
+    
+    @Query(value = "SELECT count(*) FROM item_pedido WHERE produto_id = :id", nativeQuery = true)
+    Integer verificaPedidoProduto(@Param("id") Long id);
 }
