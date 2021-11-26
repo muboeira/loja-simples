@@ -33,6 +33,6 @@ export class PedidoService extends BaseService {
   }
 
   atualizarPedido(pedido: Pedido): Observable<HttpResponse> {
-    return this.atualizar(`${this.endpoint}${pedido.id}`, pedido);
+    return this.atualizar(`${this.endpoint}`, pedido);
   }
 }

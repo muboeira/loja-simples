@@ -10,7 +10,7 @@
           <label for="cliente">Cliente:</label><br>
           <span>{{ this.getInfoCliente(pedido.cliente) }}</span><br><br>
           <label for="data">Informe a Data:</label>
-          <input type="data" [(ngModel)]="dataPreenchida" #data="ngModel" [ngModelOptions]="{standalone: true}" class="form-control">
+          <input type="data" [(ngModel)]="dataPreenchida" #data="ngModel" [ngModelOptions]="{standalone: true}" class="form-control" mask="d0/M0/0000">
         </div>
       </div>
       <div class="form-group" style="padding-top: 20px;">
@@ -48,7 +48,7 @@
             <table class="table table-striped table-bordered table-hover">
               <tbody>
                 <tr>
-                  <th>Descricao</th>
+                  <th>Descrição</th>
                   <th>Quantidade</th>
                   <th></th>
                 </tr>

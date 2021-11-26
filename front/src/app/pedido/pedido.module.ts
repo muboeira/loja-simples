@@ -6,6 +6,8 @@ import { EditarPedidoComponent } from './editar-pedido/editar-pedido.component';
 import { InserirPedidoComponent } from './inserir-pedido/inserir-pedido.component';
 import { ListarPedidoComponent } from './listar-pedido/listar-pedido.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
 @NgModule({
   declarations: [
     EditarPedidoComponent,
@@ -16,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule, 
     RouterModule, 
     FormsModule, 
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
 })
 export class PedidoModule {}

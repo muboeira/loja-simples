@@ -15,7 +15,7 @@
         </tr>
         <tr *ngFor="let pedido of pedidos">
             <td>{{ this.getInfoCliente(pedido.cliente) }}</td>
-            <td class='center'>{{ pedido.data }}</td>
+            <td class='center'>{{ pedido.data | mask: 'd0/M0/0000'}}</td>
             <td class='center'>
                 <a class="btn btn-xs btn-info"(click)="getInfoItensPedido(pedido.itensPedido)"><i class="fa fa-eye" aria-hidden="true"></i> Ver itens</a>
             </td>
